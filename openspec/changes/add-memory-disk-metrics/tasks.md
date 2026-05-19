@@ -15,11 +15,11 @@
 
 ## 2. 🟢 Green：在 `server.js` 內 inline 加 `/api/metrics/memory`
 
-- [ ] 2.1 在 `createServer()` listener 內 `/api/metrics/cpu` 分支之後、404 fallback 之前新增 `if (req.method === 'GET' && req.url === '/api/metrics/memory') { ... return }` 分支
-- [ ] 2.2 分支內 `try { const m = await si.mem(); const usedBytes = m.active; const totalBytes = m.total; const usagePercent = (m.active / m.total) * 100; res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ usedBytes, totalBytes, usagePercent })); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'memory sample failed' })); }`
-- [ ] 2.3 執行 `npm test -- memory`，4 個 case 全綠
-- [ ] 2.4 執行 `npm test`，healthz / cpu / memory 全綠（無 regression）
-- [ ] 2.5 commit，訊息標註 `stage 3 (green/memory): GET /api/metrics/memory returns systeminformation payload`
+- [x] 2.1 在 `createServer()` listener 內 `/api/metrics/cpu` 分支之後、404 fallback 之前新增 `if (req.method === 'GET' && req.url === '/api/metrics/memory') { ... return }` 分支
+- [x] 2.2 分支內 `try { const m = await si.mem(); const usedBytes = m.active; const totalBytes = m.total; const usagePercent = (m.active / m.total) * 100; res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ usedBytes, totalBytes, usagePercent })); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'memory sample failed' })); }`
+- [x] 2.3 執行 `npm test -- memory`，4 個 case 全綠
+- [x] 2.4 執行 `npm test`，healthz / cpu / memory 全綠（無 regression）
+- [x] 2.5 commit，訊息標註 `stage 3 (green/memory): GET /api/metrics/memory returns systeminformation payload`
 
 ## 3. 🟢 Green：在 `server.js` 內 inline 加 `/api/metrics/disk`
 

@@ -33,6 +33,21 @@ export function createServer() {
       return;
     }
 
+    if (req.method === 'GET' && req.url === '/api/metrics/memory') {
+      try {
+        const m = await si.mem();
+        const usedBytes = m.active;
+        const totalBytes = m.total;
+        const usagePercent = (m.active / m.total) * 100;
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ usedBytes, totalBytes, usagePercent }));
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'memory sample failed' }));
+      }
+      return;
+    }
+
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'not found' }));
   });
