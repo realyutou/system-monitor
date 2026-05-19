@@ -47,14 +47,15 @@ Each implementation phase from `docs/roadmap.md` should become its own openspec 
 
 ## Running the project
 
-Backend lives at the repo root (`server.js`); a frontend Vite app does not exist yet (lands in roadmap stage 4).
+Backend lives at the repo root (`server.js`); the frontend Vite app lives under `src/` and `index.html` (landed in roadmap stage 4).
 
 ```bash
-npm start                       # node server.js — listens on :3001
+npm start                       # vite — Vite dev server (default :5173) with proxy to :3001
+node server.js                  # backend — listens on :3001 (no npm wrapper)
 npm test                        # vitest run (one-shot, used by CI / reviewers)
 npm run test:watch              # vitest in watch mode for TDD loops
 npm test -- healthz             # run a single test file by name fragment
 curl -s localhost:3001/healthz  # smoke-test stage 1 verification
 ```
 
-The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend) and `npm start` (frontend, not yet wired — currently aliased to the backend). Per-phase verification commands are listed in `docs/roadmap.md` and each new roadmap phase MUST land as its own openspec change before code is touched.
+The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend, run directly without an npm wrapper) and `npm start` (frontend Vite dev server). Per-phase verification commands are listed in `docs/roadmap.md` and each new roadmap phase MUST land as its own openspec change before code is touched.

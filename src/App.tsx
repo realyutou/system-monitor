@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import styles from './App.module.css';
-
-type HealthStatus = 'loading' | 'ok' | 'error';
+import { useHealth, type HealthStatus } from './hooks/useHealth';
 
 const STATUS_LABEL: Record<HealthStatus, string> = {
   loading: '…',
@@ -10,26 +8,7 @@ const STATUS_LABEL: Record<HealthStatus, string> = {
 };
 
 export default function App() {
-  const [status, setStatus] = useState<HealthStatus>('loading');
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/healthz')
-      .then((res) => {
-        if (!res.ok) throw new Error(`healthz ${res.status}`);
-        return res.json();
-      })
-      .then((body: { status?: string }) => {
-        if (cancelled) return;
-        setStatus(body.status === 'ok' ? 'ok' : 'error');
-      })
-      .catch(() => {
-        if (!cancelled) setStatus('error');
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const { status } = useHealth();
 
   return (
     <main className={styles.page}>

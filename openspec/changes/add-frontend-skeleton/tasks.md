@@ -23,17 +23,17 @@
 - [x] 2.6 修改 `.gitignore`：新增 `dist/` 與 `*.tsbuildinfo`
 - [x] 2.7 跑 `npm test -- app`，三個 case 全綠
 - [x] 2.8 跑 `npm test`，前後端共 7 支測試（4 後端 + 3 前端）全綠
-- [ ] 2.9 commit，訊息標註 `stage 4 (green): vite/react skeleton fetches /healthz and renders Backend: ok`
+- [x] 2.9 commit，訊息標註 `stage 4 (green): vite/react skeleton fetches /healthz and renders Backend: ok`
 
 ## 3. ♻️ Refactor：抽 src/lib/api.ts、src/hooks/useHealth.ts、修 constitution 文字
 
-- [ ] 3.1 新增 `src/lib/api.ts`：`export const HEALTHZ_ENDPOINT = '/healthz';`、`export async function getHealth(): Promise<{ status: string }> { const res = await fetch(HEALTHZ_ENDPOINT); if (!res.ok) throw new Error(\`healthz \${res.status}\`); return res.json(); }`
-- [ ] 3.2 新增 `src/hooks/useHealth.ts`：`import { useEffect, useState } from 'react';`、`import { getHealth } from '../lib/api';`、`export type HealthStatus = 'loading' | 'ok' | 'error';`、`export function useHealth() { const [status, setStatus] = useState<HealthStatus>('loading'); useEffect(() => { let cancelled = false; getHealth().then((res) => { if (!cancelled) setStatus(res.status === 'ok' ? 'ok' : 'error'); }).catch(() => { if (!cancelled) setStatus('error'); }); return () => { cancelled = true; }; }, []); return { status }; }`
-- [ ] 3.3 修改 `src/App.tsx`：移除 inline `useEffect` / `useState` / `fetch`；改為 `import { useHealth } from './hooks/useHealth';`、`const { status } = useHealth();`；視覺基底（`/frontend-design` 產出）保持不動，只把 status 文字插槽改為消費 hook 的 `status`
-- [ ] 3.4 跑 `npm test -- app`，三個 case 仍綠（hook 與 api 抽離後行為不變）
-- [ ] 3.5 跑 `npm test`，前後端共 7 支測試仍全綠
-- [ ] 3.6 修改 `docs/roadmap.md`：phase #4 行的驗證指令欄位，把 `npm run dev` 取代為 `npm start`（行內保留其餘文字不變）
-- [ ] 3.7 修改 `CLAUDE.md` §Running the project：把「`npm start                       # node server.js — listens on :3001`」改為「`npm start                       # vite — Vite dev server (default :5173) with proxy to :3001`」；在該 code block 內補一行「`node server.js                  # backend — listens on :3001 (no npm wrapper)`」；下方段落「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend) and `npm start` (frontend, not yet wired — currently aliased to the backend).」改為「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend, run directly without an npm wrapper) and `npm start` (frontend Vite dev server).」
+- [x] 3.1 新增 `src/lib/api.ts`：`export const HEALTHZ_ENDPOINT = '/healthz';`、`export async function getHealth(): Promise<{ status: string }> { const res = await fetch(HEALTHZ_ENDPOINT); if (!res.ok) throw new Error(\`healthz \${res.status}\`); return res.json(); }`
+- [x] 3.2 新增 `src/hooks/useHealth.ts`：`import { useEffect, useState } from 'react';`、`import { getHealth } from '../lib/api';`、`export type HealthStatus = 'loading' | 'ok' | 'error';`、`export function useHealth() { const [status, setStatus] = useState<HealthStatus>('loading'); useEffect(() => { let cancelled = false; getHealth().then((res) => { if (!cancelled) setStatus(res.status === 'ok' ? 'ok' : 'error'); }).catch(() => { if (!cancelled) setStatus('error'); }); return () => { cancelled = true; }; }, []); return { status }; }`
+- [x] 3.3 修改 `src/App.tsx`：移除 inline `useEffect` / `useState` / `fetch`；改為 `import { useHealth } from './hooks/useHealth';`、`const { status } = useHealth();`；視覺基底（`/frontend-design` 產出）保持不動，只把 status 文字插槽改為消費 hook 的 `status`
+- [x] 3.4 跑 `npm test -- app`，三個 case 仍綠（hook 與 api 抽離後行為不變）
+- [x] 3.5 跑 `npm test`，前後端共 7 支測試仍全綠
+- [x] 3.6 修改 `docs/roadmap.md`：phase #4 行的驗證指令欄位，把 `npm run dev` 取代為 `npm start`（行內保留其餘文字不變）
+- [x] 3.7 修改 `CLAUDE.md` §Running the project：把「`npm start                       # node server.js — listens on :3001`」改為「`npm start                       # vite — Vite dev server (default :5173) with proxy to :3001`」；在該 code block 內補一行「`node server.js                  # backend — listens on :3001 (no npm wrapper)`」；下方段落「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend) and `npm start` (frontend, not yet wired — currently aliased to the backend).」改為「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend, run directly without an npm wrapper) and `npm start` (frontend Vite dev server).」
 - [ ] 3.8 commit，訊息標註 `stage 4 (refactor): extract useHealth + src/lib/api and sync constitution docs`
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #4 修正後的驗證指令）
