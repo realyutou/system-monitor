@@ -32,18 +32,18 @@
 
 ## 4. ♻️ Refactor：抽 `server/metricsRouter.js` 並統一錯誤格式
 
-- [ ] 4.1 建立 `server/` 子目錄與 `server/metricsRouter.js`；在新檔頂部 `import * as si from 'systeminformation'`
-- [ ] 4.2 把 `server.js` 內的 `readCpu()` 整個搬到 `server/metricsRouter.js`（行為不變，仍是 zero-arg async）
-- [ ] 4.3 在 `server/metricsRouter.js` 新增 zero-arg `async function readMemory()`，內容對應 §2.2（從 `server.js` 搬移後改為 helper 形式）
-- [ ] 4.4 在 `server/metricsRouter.js` 新增 zero-arg `async function readDisk()`，內容對應 §3.3（包含 `FS_TYPES` 常數一併搬入）
-- [ ] 4.5 在 `server/metricsRouter.js` 新增 `const HANDLERS = { cpu: readCpu, memory: readMemory, disk: readDisk };` 與 `export async function metricsRouter(req, res) { if (req.method !== 'GET' || !req.url?.startsWith('/api/metrics/')) return false; const name = req.url.slice('/api/metrics/'.length); const handler = HANDLERS[name]; if (!handler) return false; try { const dto = await handler(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(dto)); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: \`${name} sample failed\` })); } return true; }`
-- [ ] 4.6 在 `server.js` 頂部新增 `import { metricsRouter } from './server/metricsRouter.js';`
-- [ ] 4.7 在 `server.js` listener 內，於 `/healthz` 分支之後、404 fallback 之前替換為單一委派：`if (req.url?.startsWith('/api/metrics/')) { const handled = await metricsRouter(req, res); if (handled) return; }`（讓未知 `/api/metrics/<x>` fallthrough 到 404）
-- [ ] 4.8 從 `server.js` 移除 `import * as si from 'systeminformation'`、舊 `readCpu()` 函式、`/api/metrics/cpu` / `/api/metrics/memory` / `/api/metrics/disk` 三個 inline 分支、`FS_TYPES` 常數
-- [ ] 4.9 `grep -n "systeminformation" server.js` 應無任何結果
-- [ ] 4.10 `grep -rn "si\\.currentLoad\\|si\\.mem\\|si\\.fsSize" server.js server/` 應只在 `server/metricsRouter.js` 內各出現一次
-- [ ] 4.11 執行 `npm test`，healthz / cpu / memory / disk 全綠（無 regression）
-- [ ] 4.12 commit，訊息標註 `stage 3 (refactor): extract metricsRouter and unify error envelope`
+- [x] 4.1 建立 `server/` 子目錄與 `server/metricsRouter.js`；在新檔頂部 `import * as si from 'systeminformation'`
+- [x] 4.2 把 `server.js` 內的 `readCpu()` 整個搬到 `server/metricsRouter.js`（行為不變，仍是 zero-arg async）
+- [x] 4.3 在 `server/metricsRouter.js` 新增 zero-arg `async function readMemory()`，內容對應 §2.2（從 `server.js` 搬移後改為 helper 形式）
+- [x] 4.4 在 `server/metricsRouter.js` 新增 zero-arg `async function readDisk()`，內容對應 §3.3（包含 `FS_TYPES` 常數一併搬入）
+- [x] 4.5 在 `server/metricsRouter.js` 新增 `const HANDLERS = { cpu: readCpu, memory: readMemory, disk: readDisk };` 與 `export async function metricsRouter(req, res) { if (req.method !== 'GET' || !req.url?.startsWith('/api/metrics/')) return false; const name = req.url.slice('/api/metrics/'.length); const handler = HANDLERS[name]; if (!handler) return false; try { const dto = await handler(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(dto)); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: \`${name} sample failed\` })); } return true; }`
+- [x] 4.6 在 `server.js` 頂部新增 `import { metricsRouter } from './server/metricsRouter.js';`
+- [x] 4.7 在 `server.js` listener 內，於 `/healthz` 分支之後、404 fallback 之前替換為單一委派：`if (req.url?.startsWith('/api/metrics/')) { const handled = await metricsRouter(req, res); if (handled) return; }`（讓未知 `/api/metrics/<x>` fallthrough 到 404）
+- [x] 4.8 從 `server.js` 移除 `import * as si from 'systeminformation'`、舊 `readCpu()` 函式、`/api/metrics/cpu` / `/api/metrics/memory` / `/api/metrics/disk` 三個 inline 分支、`FS_TYPES` 常數
+- [x] 4.9 `grep -n "systeminformation" server.js` 應無任何結果
+- [x] 4.10 `grep -rn "si\\.currentLoad\\|si\\.mem\\|si\\.fsSize" server.js server/` 應只在 `server/metricsRouter.js` 內各出現一次
+- [x] 4.11 執行 `npm test`，healthz / cpu / memory / disk 全綠（無 regression）
+- [x] 4.12 commit，訊息標註 `stage 3 (refactor): extract metricsRouter and unify error envelope`
 
 ## 5. 驗證（對照 `docs/roadmap.md` 階段 #3）
 
