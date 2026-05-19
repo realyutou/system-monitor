@@ -54,16 +54,16 @@
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #5 驗證指令）
 
-- [ ] 4.1 跑 `npm test -- cpu-chart`，退出碼 0、涵蓋兩個 case（非空 data 渲染 path、空 data 仍 mount）
-- [ ] 4.2 跑 `npm test`，退出碼 0、涵蓋全部測試（4 後端 + 3 toCpuSeries + 2 CpuChart + 5 App = 14 支），無 jsdom / node 環境衝突
-- [ ] 4.3 開 terminal A 跑 `node server.js`，`:3001` 啟動成功
-- [ ] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 dev URL（通常 `http://localhost:5173/`）
-- [ ] 4.5 瀏覽器開 Vite dev URL：header 區看到「Backend: ok」徽章；main 區塊看到 `<CpuChart>` 渲染出 Y 軸 0–100、X 軸時間刻度、一個 dot；DevTools Network 確認 `/healthz` 與 `/api/metrics/cpu` 各被請求一次、均為 200
-- [ ] 4.6 暫停 terminal A 後端（Ctrl+C），重整瀏覽器：頁面不 crash，chart 容器仍 mount（dot 消失），「Backend: ok」文字消失（health hook 設 error）；重新跑 `node server.js`，重整後兩者均回復
-- [ ] 4.7 跑 `npm run build`，退出碼 0、產出 `dist/`（驗證 Recharts 加入後 Vite production build chain 仍能 compile）
+- [x] 4.1 跑 `npm test -- cpu-chart`，退出碼 0、涵蓋兩個 case（非空 data 渲染 path、空 data 仍 mount）
+- [x] 4.2 跑 `npm test`，退出碼 0、涵蓋全部測試（4 後端 + 3 toCpuSeries + 2 CpuChart + 5 App = 14 支），無 jsdom / node 環境衝突
+- [x] 4.3 開 terminal A 跑 `node server.js`，`:3001` 啟動成功
+- [x] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 dev URL（通常 `http://localhost:5173/`）
+- [x] 4.5 瀏覽器開 Vite dev URL：header 區看到「Backend: ok」徽章；main 區塊看到 `<CpuChart>` 渲染出 Y 軸 0–100、X 軸時間刻度、一個 dot；DevTools Network 確認 `/healthz` 與 `/api/metrics/cpu` 各被請求一次、均為 200
+- [x] 4.6 暫停 terminal A 後端（Ctrl+C），重整瀏覽器：頁面不 crash，chart 容器仍 mount（dot 消失），「Backend: ok」文字消失（health hook 設 error）；重新跑 `node server.js`，重整後兩者均回復
+- [x] 4.7 跑 `npm run build`，退出碼 0、產出 `dist/`（驗證 Recharts 加入後 Vite production build chain 仍能 compile）
 
 ## 5. openspec hygiene
 
-- [ ] 5.1 跑 `openspec validate add-cpu-chart --strict`，退出碼 0
-- [ ] 5.2 跑 `openspec status --change add-cpu-chart`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
-- [ ] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #5 通過、瀏覽器驗證跑過再 archive（避免在驗證前把 delta 併入主 spec）
+- [x] 5.1 跑 `openspec validate add-cpu-chart --strict`，退出碼 0
+- [x] 5.2 跑 `openspec status --change add-cpu-chart`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
+- [x] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #5 通過、瀏覽器驗證跑過再 archive（避免在驗證前把 delta 併入主 spec）
