@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import { useHealth, type HealthStatus } from './hooks/useHealth';
+import { useCpu } from './hooks/useCpu';
 import { CpuChart } from './components/CpuChart';
-import { toCpuSeries, type CpuChartRow } from './lib/toCpuSeries';
 
 const STATUS_LABEL: Record<HealthStatus, string> = {
   loading: '…',
@@ -12,24 +11,7 @@ const STATUS_LABEL: Record<HealthStatus, string> = {
 
 export default function App() {
   const { status } = useHealth();
-  const [cpuData, setCpuData] = useState<CpuChartRow[] | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/api/metrics/cpu')
-      .then((r) =>
-        r.ok ? r.json() : Promise.reject(new Error(`cpu ${r.status}`)),
-      )
-      .then((dto) => {
-        if (!cancelled) setCpuData(toCpuSeries([dto]));
-      })
-      .catch(() => {
-        /* swallow — UI still mounts an empty chart */
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const { data: cpuData, status: cpuStatus } = useCpu();
 
   return (
     <main className={styles.page}>
@@ -48,6 +30,9 @@ export default function App() {
       </header>
       <section className={styles.main}>
         <CpuChart data={cpuData ?? []} />
+        {cpuStatus === 'error' && (
+          <p className={styles.notice}>CPU metric unavailable</p>
+        )}
       </section>
     </main>
   );

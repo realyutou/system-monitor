@@ -1,8 +1,4 @@
-type CpuMetricDto = {
-  usagePercent: number;
-  cores: number;
-  timestamp: string;
-};
+import type { CpuMetricDto } from './api';
 
 export type CpuChartRow = { time: number; usage: number };
 

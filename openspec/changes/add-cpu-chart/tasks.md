@@ -36,21 +36,21 @@
 
 ## 3. ♻️ Refactor：抽 `src/lib/api.ts` 的 CPU contract、抽 `src/hooks/useCpu.ts`、App 改用 hook
 
-- [ ] 3.1 修改 `src/lib/api.ts`：在現有 `HEALTHZ_ENDPOINT` / `getHealth` 之後加：
+- [x] 3.1 修改 `src/lib/api.ts`：在現有 `HEALTHZ_ENDPOINT` / `getHealth` 之後加：
     - `export const CPU_ENDPOINT = '/api/metrics/cpu';`
     - `export type CpuMetricDto = { usagePercent: number; cores: number; timestamp: string };`
     - `export async function getCpu(): Promise<CpuMetricDto> { const res = await fetch(CPU_ENDPOINT); if (!res.ok) throw new Error(\`cpu \${res.status}\`); return res.json(); }`
-- [ ] 3.2 修改 `src/lib/toCpuSeries.ts`：把 stage 2 inline 的 `type CpuMetricDto = ...` 移除，改為 `import type { CpuMetricDto } from './api'`
-- [ ] 3.3 新增 `src/hooks/useCpu.ts`：
+- [x] 3.2 修改 `src/lib/toCpuSeries.ts`：把 stage 2 inline 的 `type CpuMetricDto = ...` 移除，改為 `import type { CpuMetricDto } from './api'`
+- [x] 3.3 新增 `src/hooks/useCpu.ts`：
     - `import { useEffect, useState } from 'react';`
     - `import { getCpu } from '../lib/api';`
     - `import { toCpuSeries, type CpuChartRow } from '../lib/toCpuSeries';`
     - `export type CpuStatus = 'loading' | 'ok' | 'error';`
     - `export function useCpu() { const [data, setData] = useState<CpuChartRow[] | null>(null); const [status, setStatus] = useState<CpuStatus>('loading'); useEffect(() => { let cancelled = false; getCpu().then((dto) => { if (cancelled) return; setData(toCpuSeries([dto])); setStatus('ok'); }).catch(() => { if (cancelled) return; setStatus('error'); }); return () => { cancelled = true; }; }, []); return { data, status }; }`
-- [ ] 3.4 修改 `src/App.tsx`：移除 stage 2 inline 的 `useState<CpuChartRow[] | null>` 與 inline `useEffect` / `fetch`；改為 `import { useCpu } from './hooks/useCpu';`、`const { data: cpuData, status: cpuStatus } = useCpu();`；`<CpuChart data={cpuData ?? []} />` 保持不變；可選地在 chart 容器下方加 `{cpuStatus === 'error' && <p className={styles.notice}>CPU metric unavailable</p>}`（不破測試，testid 仍是 cpu-chart）
-- [ ] 3.5 跑 `npm test -- toCpuSeries`、`npm test -- cpu-chart`、`npm test -- app`，全部仍綠
-- [ ] 3.6 跑 `npm test`，前後端所有測試全綠
-- [ ] 3.7 commit，訊息標註 `stage 5 (refactor): extract useCpu + toCpuSeries from api.ts and rewire App`
+- [x] 3.4 修改 `src/App.tsx`：移除 stage 2 inline 的 `useState<CpuChartRow[] | null>` 與 inline `useEffect` / `fetch`；改為 `import { useCpu } from './hooks/useCpu';`、`const { data: cpuData, status: cpuStatus } = useCpu();`；`<CpuChart data={cpuData ?? []} />` 保持不變；可選地在 chart 容器下方加 `{cpuStatus === 'error' && <p className={styles.notice}>CPU metric unavailable</p>}`（不破測試，testid 仍是 cpu-chart）
+- [x] 3.5 跑 `npm test -- toCpuSeries`、`npm test -- cpu-chart`、`npm test -- app`，全部仍綠
+- [x] 3.6 跑 `npm test`，前後端所有測試全綠
+- [x] 3.7 commit，訊息標註 `stage 5 (refactor): extract useCpu + toCpuSeries from api.ts and rewire App`
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #5 驗證指令）
 
