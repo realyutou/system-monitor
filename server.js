@@ -4,6 +4,15 @@ import * as si from 'systeminformation';
 
 export const PORT = 3001;
 
+async function readCpu() {
+  const load = await si.currentLoad();
+  return {
+    usagePercent: load.currentLoad,
+    cores: load.cpus.length,
+    timestamp: new Date().toISOString(),
+  };
+}
+
 export function createServer() {
   return http.createServer(async (req, res) => {
     if (req.method === 'GET' && req.url === '/healthz') {
@@ -14,15 +23,9 @@ export function createServer() {
 
     if (req.method === 'GET' && req.url === '/api/metrics/cpu') {
       try {
-        const load = await si.currentLoad();
+        const dto = await readCpu();
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(
-          JSON.stringify({
-            usagePercent: load.currentLoad,
-            cores: load.cpus.length,
-            timestamp: new Date().toISOString(),
-          })
-        );
+        res.end(JSON.stringify(dto));
       } catch (err) {
         res.writeHead(500, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'cpu sample failed' }));

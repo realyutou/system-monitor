@@ -25,12 +25,12 @@
 
 ## 4. ♻️ Refactor：抽 `readCpu()`
 
-- [ ] 4.1 在 `server.js` 內（與 `createServer` 同檔，不另開檔案）新增 `async function readCpu() { const load = await si.currentLoad(); return { usagePercent: load.currentLoad, cores: load.cpus.length, timestamp: new Date().toISOString() }; }`
-- [ ] 4.2 將 CPU 分支的 try 區塊改為 `const dto = await readCpu(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(dto));`
-- [ ] 4.3 `grep -n "currentLoad" server.js` 應只在 `readCpu()` 內出現一次（CPU 分支不再直接呼叫 `si.currentLoad`）
-- [ ] 4.4 確認 `readCpu()` 內部完全不依賴 `req` / `res` / `http.*`（純資料函式）
-- [ ] 4.5 再跑一次 `npm test`，仍為綠燈
-- [ ] 4.6 commit，訊息標註 `stage 2 (refactor): extract readCpu() helper`
+- [x] 4.1 在 `server.js` 內（與 `createServer` 同檔，不另開檔案）新增 `async function readCpu() { const load = await si.currentLoad(); return { usagePercent: load.currentLoad, cores: load.cpus.length, timestamp: new Date().toISOString() }; }`
+- [x] 4.2 將 CPU 分支的 try 區塊改為 `const dto = await readCpu(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(dto));`
+- [x] 4.3 `grep -n "currentLoad" server.js` 應只在 `readCpu()` 內出現一次（CPU 分支不再直接呼叫 `si.currentLoad`）
+- [x] 4.4 確認 `readCpu()` 內部完全不依賴 `req` / `res` / `http.*`（純資料函式）
+- [x] 4.5 再跑一次 `npm test`，仍為綠燈
+- [x] 4.6 commit，訊息標註 `stage 2 (refactor): extract readCpu() helper`
 
 ## 5. 驗證（對照 `docs/roadmap.md` 階段 2）
 
