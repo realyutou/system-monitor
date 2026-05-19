@@ -10,6 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "dependencies": {
+    "systeminformation": "^5"
+  },
   "devDependencies": {
     "supertest": "^6",
     "vitest": "^1"
