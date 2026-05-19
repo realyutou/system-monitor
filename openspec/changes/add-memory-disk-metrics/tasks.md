@@ -47,18 +47,18 @@
 
 ## 5. 驗證（對照 `docs/roadmap.md` 階段 #3）
 
-- [ ] 5.1 `npm test -- metrics` 退出碼為 0 且涵蓋 cpu / memory / disk 三條 metric 的全部 case
-- [ ] 5.2 `npm test` 全部綠燈（healthz + cpu + memory + disk）
-- [ ] 5.3 一個 shell 跑 `node server.js`；另一個 shell 跑 `curl -s localhost:3001/api/metrics/memory | jq`，輸出含 `usedBytes` / `totalBytes` / `usagePercent` 三欄，且 `usagePercent ∈ [0, 100]`
-- [ ] 5.4 跑 `curl -s localhost:3001/api/metrics/disk | jq '.mounts | length'`，本機常見值 1–3；跑 `curl -s localhost:3001/api/metrics/disk | jq '.mounts[].fs'`，肉眼確認回傳的是真實磁碟（非 `/System/Volumes/...` 字樣）
-- [ ] 5.5 跑 `curl -s -o /dev/null -w '%{time_total}\n' localhost:3001/api/metrics/disk`，確認單次 round-trip < 0.1 秒（< 100 ms 預算）；對 memory 也跑一次
-- [ ] 5.6 跑 `curl -s -o /dev/null -w '%{http_code}\n' localhost:3001/api/metrics/foo`，輸出必須為 `404`（驗證 router 未黑洞未知子路徑）
-- [ ] 5.7 跑 `curl -s localhost:3001/api/metrics/foo | jq`，body 必須為 `{ "error": <string> }`（驗證 envelope 一致）
-- [ ] 5.8 跑 `curl -s localhost:3001/healthz` 與 `curl -s localhost:3001/api/metrics/cpu | jq`，確認 phase #1 / #2 行為未被破壞（regression smoke）
-- [ ] 5.9 跑 `node --input-type=module -e "import('./server/metricsRouter.js').then(() => console.log('ok'))"`，輸出只有 `ok`，無 startup log、無 port 衝突（驗證 phase #1 spec scenario「Importing createServer does not start listening」相容）
+- [x] 5.1 `npm test -- cpu memory disk` 退出碼為 0 且涵蓋 cpu / memory / disk 三條 metric 的全部 case（vitest filter 是檔名 substring，三個 token OR-match 對應三支 metric test）
+- [x] 5.2 `npm test` 全部綠燈（healthz + cpu + memory + disk）
+- [x] 5.3 一個 shell 跑 `node server.js`；另一個 shell 跑 `curl -s localhost:3001/api/metrics/memory | jq`，輸出含 `usedBytes` / `totalBytes` / `usagePercent` 三欄，且 `usagePercent ∈ [0, 100]`
+- [x] 5.4 跑 `curl -s localhost:3001/api/metrics/disk | jq '.mounts | length'`，本機常見值 1–3；跑 `curl -s localhost:3001/api/metrics/disk | jq '.mounts[].fs'`，肉眼確認回傳的是真實磁碟（非 `/System/Volumes/...` 字樣）
+- [x] 5.5 跑 `curl -s -o /dev/null -w '%{time_total}\n' localhost:3001/api/metrics/disk`，確認單次 round-trip < 0.1 秒（< 100 ms 預算）；對 memory 也跑一次
+- [x] 5.6 跑 `curl -s -o /dev/null -w '%{http_code}\n' localhost:3001/api/metrics/foo`，輸出必須為 `404`（驗證 router 未黑洞未知子路徑）
+- [x] 5.7 跑 `curl -s localhost:3001/api/metrics/foo | jq`，body 必須為 `{ "error": <string> }`（驗證 envelope 一致）
+- [x] 5.8 跑 `curl -s localhost:3001/healthz` 與 `curl -s localhost:3001/api/metrics/cpu | jq`，確認 phase #1 / #2 行為未被破壞（regression smoke）
+- [x] 5.9 跑 `node --input-type=module -e "import('./server/metricsRouter.js').then(() => console.log('ok'))"`，輸出只有 `ok`，無 startup log、無 port 衝突（驗證 phase #1 spec scenario「Importing createServer does not start listening」相容）
 
 ## 6. openspec hygiene
 
-- [ ] 6.1 `openspec validate add-memory-disk-metrics` 退出碼 0
-- [ ] 6.2 `openspec status --change add-memory-disk-metrics` 顯示所有 artifact `done`、所有 task `[x]`
-- [ ] 6.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #3 通過再 archive，避免在驗證前把 delta 併入主 spec
+- [x] 6.1 `openspec validate add-memory-disk-metrics` 退出碼 0
+- [x] 6.2 `openspec status --change add-memory-disk-metrics` 顯示所有 artifact `done`、所有 task `[x]`
+- [x] 6.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #3 通過再 archive，避免在驗證前把 delta 併入主 spec
