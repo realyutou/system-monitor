@@ -11,18 +11,18 @@
     - `it('starts in a non-ok state before the fetch resolves')`：`vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))`；`render(<App />)`；`expect(screen.queryByText(/Backend: ok/i)).toBeNull()`
 - [x] 1.7 跑 `npm test -- app`，親眼確認測試 fail（`src/App.tsx` 不存在 → Vite resolve 失敗）
 - [x] 1.8 跑 `npm test`，確認後端 `tests/server/*.test.js` 四支（healthz / cpu / memory / disk）仍綠（vitest config 改動不破壞既有測試）
-- [ ] 1.9 commit，訊息標註 `stage 4 (red): failing App test + vite/vitest toolchain`
+- [x] 1.9 commit，訊息標註 `stage 4 (red): failing App test + vite/vitest toolchain`
 
 ## 2. 🟢 Green：用 `/frontend-design` 產出視覺基底 + 接上 useEffect/fetch
 
-- [ ] 2.1 新增 `index.html`：標準 Vite + React 模板，`<title>system-monitor</title>`、`<div id="root"></div>`、`<script type="module" src="/src/main.tsx"></script>`
-- [ ] 2.2 新增 `src/main.tsx`：`import { StrictMode } from 'react'`、`import { createRoot } from 'react-dom/client'`、`import App from './App'`、`import './App.module.css'`（若 `/frontend-design` 輸出檔名不同則對應調整）；`createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)`
-- [ ] 2.3 調用 `/frontend-design` skill：brief 內容為「Phase #4 minimum page for a Node.js system-monitor dashboard. The page has ONE visible element: a status block that will display `Backend: <status>`. No charts, no polling indicator, no mobile breakpoints, no placeholder for future content. Provide typography + layout + color tokens that establish a clean design baseline future phases will extend. Output: a React functional component for src/App.tsx and a CSS module (or equivalent) file. The component must include a text node that contains the literal substring `Backend: ok` when its prop or state indicates the backend is healthy.」；把產出整合進 `src/App.tsx`
-- [ ] 2.4 在 2.3 產出的 `src/App.tsx` 內接上「inline `useEffect` + `useState` + `fetch('/healthz')`」邏輯（Green 階段刻意 inline，Refactor 階段才抽 hook / api 模組）：成功時 setStatus('ok')、失敗時 setStatus('error')、初始 'loading'；模板上把該 status 顯示成 `Backend: ok` / `Backend: …` / `Backend: error` 之一（成功路徑文字必須含 `Backend: ok`）
-- [ ] 2.5 修改 `package.json`：`scripts.start` 從 `node server.js` 改為 `vite`；新增 `scripts.build = 'vite build'`、`scripts.preview = 'vite preview'`；保留 `scripts.test` 與 `scripts.test:watch` 不動
-- [ ] 2.6 修改 `.gitignore`：新增 `dist/` 與 `*.tsbuildinfo`
-- [ ] 2.7 跑 `npm test -- app`，三個 case 全綠
-- [ ] 2.8 跑 `npm test`，前後端共 7 支測試（4 後端 + 3 前端）全綠
+- [x] 2.1 新增 `index.html`：標準 Vite + React 模板，`<title>system-monitor</title>`、`<div id="root"></div>`、`<script type="module" src="/src/main.tsx"></script>`
+- [x] 2.2 新增 `src/main.tsx`：`import { StrictMode } from 'react'`、`import { createRoot } from 'react-dom/client'`、`import App from './App'`、`import './App.module.css'`（若 `/frontend-design` 輸出檔名不同則對應調整）；`createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)`
+- [x] 2.3 調用 `/frontend-design` skill：brief 內容為「Phase #4 minimum page for a Node.js system-monitor dashboard. The page has ONE visible element: a status block that will display `Backend: <status>`. No charts, no polling indicator, no mobile breakpoints, no placeholder for future content. Provide typography + layout + color tokens that establish a clean design baseline future phases will extend. Output: a React functional component for src/App.tsx and a CSS module (or equivalent) file. The component must include a text node that contains the literal substring `Backend: ok` when its prop or state indicates the backend is healthy.」；把產出整合進 `src/App.tsx`
+- [x] 2.4 在 2.3 產出的 `src/App.tsx` 內接上「inline `useEffect` + `useState` + `fetch('/healthz')`」邏輯（Green 階段刻意 inline，Refactor 階段才抽 hook / api 模組）：成功時 setStatus('ok')、失敗時 setStatus('error')、初始 'loading'；模板上把該 status 顯示成 `Backend: ok` / `Backend: …` / `Backend: error` 之一（成功路徑文字必須含 `Backend: ok`）
+- [x] 2.5 修改 `package.json`：`scripts.start` 從 `node server.js` 改為 `vite`；新增 `scripts.build = 'vite build'`、`scripts.preview = 'vite preview'`；保留 `scripts.test` 與 `scripts.test:watch` 不動
+- [x] 2.6 修改 `.gitignore`：新增 `dist/` 與 `*.tsbuildinfo`
+- [x] 2.7 跑 `npm test -- app`，三個 case 全綠
+- [x] 2.8 跑 `npm test`，前後端共 7 支測試（4 後端 + 3 前端）全綠
 - [ ] 2.9 commit，訊息標註 `stage 4 (green): vite/react skeleton fetches /healthz and renders Backend: ok`
 
 ## 3. ♻️ Refactor：抽 src/lib/api.ts、src/hooks/useHealth.ts、修 constitution 文字
