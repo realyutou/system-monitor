@@ -1,3 +1,18 @@
+## MODIFIED Requirements
+
+### Requirement: CPU sampling is encapsulated in a pure helper
+
+The backend SHALL expose the CPU sampling + DTO mapping as a parameterless
+async function named `readCpu()` inside `server/metricsRouter.js`, so the HTTP
+handler stays thin and future phases can replace the helper with
+fixture-driven data without touching request/response code.
+
+#### Scenario: readCpu returns a DTO without HTTP coupling
+- **WHEN** test code calls `readCpu()` directly (without going through an HTTP request)
+- **THEN** the returned value MUST be an object with the fields `usagePercent`, `cores`, and `timestamp`
+- **AND** the function signature MUST take zero parameters
+- **AND** the function body MUST NOT reference any `req`, `res`, or `http.*` symbols
+
 ## ADDED Requirements
 
 ### Requirement: Memory metric endpoint returns systeminformation snapshot
