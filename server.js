@@ -1,13 +1,32 @@
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
+import * as si from 'systeminformation';
 
 export const PORT = 3001;
 
 export function createServer() {
-  return http.createServer((req, res) => {
+  return http.createServer(async (req, res) => {
     if (req.method === 'GET' && req.url === '/healthz') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ status: 'ok' }));
+      return;
+    }
+
+    if (req.method === 'GET' && req.url === '/api/metrics/cpu') {
+      try {
+        const load = await si.currentLoad();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(
+          JSON.stringify({
+            usagePercent: load.currentLoad,
+            cores: load.cpus.length,
+            timestamp: new Date().toISOString(),
+          })
+        );
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'cpu sample failed' }));
+      }
       return;
     }
 

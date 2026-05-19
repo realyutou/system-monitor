@@ -16,12 +16,12 @@
 
 ## 3. 🟢 Green：以 `systeminformation` 實作 handler
 
-- [ ] 3.1 在 `server.js` 頂部新增 `import * as si from 'systeminformation'`
-- [ ] 3.2 將 `createServer()` 內的 request listener 改為 `async (req, res) => { ... }`（既有 `/healthz` 與 404 分支行為不變）
-- [ ] 3.3 在 listener 內新增 `if (req.method === 'GET' && req.url === '/api/metrics/cpu') { ... return }` 分支，置於 `/healthz` 分支之後、404 fallback 之前
-- [ ] 3.4 分支內以 `try { const load = await si.currentLoad(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ usagePercent: load.currentLoad, cores: load.cpus.length, timestamp: new Date().toISOString() })) } catch (err) { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'cpu sample failed' })) }`
-- [ ] 3.5 執行 `npm test`，cpu 4 個 case 與既有 healthz 全部綠燈
-- [ ] 3.6 commit，訊息標註 `stage 2 (green): GET /api/metrics/cpu returns systeminformation payload`
+- [x] 3.1 在 `server.js` 頂部新增 `import * as si from 'systeminformation'`
+- [x] 3.2 將 `createServer()` 內的 request listener 改為 `async (req, res) => { ... }`（既有 `/healthz` 與 404 分支行為不變）
+- [x] 3.3 在 listener 內新增 `if (req.method === 'GET' && req.url === '/api/metrics/cpu') { ... return }` 分支，置於 `/healthz` 分支之後、404 fallback 之前
+- [x] 3.4 分支內以 `try { const load = await si.currentLoad(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ usagePercent: load.currentLoad, cores: load.cpus.length, timestamp: new Date().toISOString() })) } catch (err) { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'cpu sample failed' })) }`
+- [x] 3.5 執行 `npm test`，cpu 4 個 case 與既有 healthz 全部綠燈
+- [x] 3.6 commit，訊息標註 `stage 2 (green): GET /api/metrics/cpu returns systeminformation payload`
 
 ## 4. ♻️ Refactor：抽 `readCpu()`
 
