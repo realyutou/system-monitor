@@ -34,14 +34,14 @@
 
 ## 5. 驗證（對照 `docs/roadmap.md` 階段 2）
 
-- [ ] 5.1 `npm test -- cpu` 退出碼為 0 且 4 個 case 通過
-- [ ] 5.2 `npm test` 全部綠燈（healthz + cpu）
-- [ ] 5.3 開一個 shell 跑 `node server.js`；另一個 shell 跑 `curl -s localhost:3001/api/metrics/cpu | jq`，輸出必須含 `usagePercent`、`cores`、`timestamp` 三欄且 `usagePercent` 落在 0–100
-- [ ] 5.4 跑 `curl -s -o /dev/null -w '%{time_total}\n' localhost:3001/api/metrics/cpu`，確認單次 round-trip < 0.1 秒（< 100ms 預算）
-- [ ] 5.5 順便跑 `curl -s localhost:3001/healthz`，確認 `/healthz` 仍回 `{"status":"ok"}`（未被破壞）
+- [x] 5.1 `npm test -- cpu` 退出碼為 0 且 4 個 case 通過
+- [x] 5.2 `npm test` 全部綠燈（healthz + cpu）
+- [x] 5.3 開一個 shell 跑 `node server.js`；另一個 shell 跑 `curl -s localhost:3001/api/metrics/cpu | jq`，輸出必須含 `usagePercent`、`cores`、`timestamp` 三欄且 `usagePercent` 落在 0–100
+- [x] 5.4 跑 `curl -s -o /dev/null -w '%{time_total}\n' localhost:3001/api/metrics/cpu`，確認單次 round-trip < 0.1 秒（< 100ms 預算）
+- [x] 5.5 順便跑 `curl -s localhost:3001/healthz`，確認 `/healthz` 仍回 `{"status":"ok"}`（未被破壞）
 
 ## 6. openspec hygiene
 
-- [ ] 6.1 `openspec validate add-cpu-metric` 退出碼 0
-- [ ] 6.2 `openspec status --change add-cpu-metric` 顯示所有 artifact `done`、所有 task `[x]`
-- [ ] 6.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase 2 通過再 archive，避免在驗證前把 delta 併入主 spec
+- [x] 6.1 `openspec validate add-cpu-metric` 退出碼 0
+- [x] 6.2 `openspec status --change add-cpu-metric` 顯示所有 artifact `done`、所有 task `[x]`
+- [x] 6.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase 2 通過再 archive，避免在驗證前把 delta 併入主 spec
