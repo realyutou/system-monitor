@@ -34,20 +34,20 @@
 - [x] 3.5 跑 `npm test`，前後端共 7 支測試仍全綠
 - [x] 3.6 修改 `docs/roadmap.md`：phase #4 行的驗證指令欄位，把 `npm run dev` 取代為 `npm start`（行內保留其餘文字不變）
 - [x] 3.7 修改 `CLAUDE.md` §Running the project：把「`npm start                       # node server.js — listens on :3001`」改為「`npm start                       # vite — Vite dev server (default :5173) with proxy to :3001`」；在該 code block 內補一行「`node server.js                  # backend — listens on :3001 (no npm wrapper)`」；下方段落「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend) and `npm start` (frontend, not yet wired — currently aliased to the backend).」改為「The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend, run directly without an npm wrapper) and `npm start` (frontend Vite dev server).」
-- [ ] 3.8 commit，訊息標註 `stage 4 (refactor): extract useHealth + src/lib/api and sync constitution docs`
+- [x] 3.8 commit，訊息標註 `stage 4 (refactor): extract useHealth + src/lib/api and sync constitution docs`
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #4 修正後的驗證指令）
 
-- [ ] 4.1 跑 `npm test -- app`，退出碼 0、涵蓋三個 case（成功、失敗、初始）
-- [ ] 4.2 跑 `npm test`，退出碼 0、涵蓋全部 7 支測試（4 後端 + 3 前端），無 jsdom / node 環境衝突
-- [ ] 4.3 開 terminal A 跑 `node server.js`，確認 `:3001` 啟動成功（log 含 `listening on 3001` 或對應字樣）
-- [ ] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 `Local: http://localhost:5173/`（或 Vite 預設 port）
-- [ ] 4.5 瀏覽器開 Vite dev URL，看到 `Backend: ok` 文字；DevTools Network 確認 `/healthz` 是 200、Response body 為 `{"status":"ok"}`，且 request URL 是相對路徑（不是 `http://localhost:3001`）
-- [ ] 4.6 暫停 terminal A 的後端（Ctrl+C），重整瀏覽器，畫面不 crash（保持 `<main>` 結構，文字不顯示 `Backend: ok`）；重新跑 `node server.js`，重整後 `Backend: ok` 再次出現
-- [ ] 4.7 跑 `npm run build`，退出碼 0、產出 `dist/`（驗證 Vite production build chain 至少能 compile）；確認 `dist/` 被 `.gitignore` 忽略
+- [x] 4.1 跑 `npm test -- app`，退出碼 0、涵蓋三個 case（成功、失敗、初始）
+- [x] 4.2 跑 `npm test`，退出碼 0、涵蓋全部 7 支測試（4 後端 + 3 前端），無 jsdom / node 環境衝突
+- [x] 4.3 開 terminal A 跑 `node server.js`，確認 `:3001` 啟動成功（log 含 `listening on 3001` 或對應字樣）
+- [x] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 `Local: http://localhost:5173/`（或 Vite 預設 port）
+- [x] 4.5 瀏覽器開 Vite dev URL，看到 `Backend: ok` 文字；DevTools Network 確認 `/healthz` 是 200、Response body 為 `{"status":"ok"}`，且 request URL 是相對路徑（不是 `http://localhost:3001`）
+- [x] 4.6 暫停 terminal A 的後端（Ctrl+C），重整瀏覽器，畫面不 crash（保持 `<main>` 結構，文字不顯示 `Backend: ok`）；重新跑 `node server.js`，重整後 `Backend: ok` 再次出現
+- [x] 4.7 跑 `npm run build`，退出碼 0、產出 `dist/`（驗證 Vite production build chain 至少能 compile）；確認 `dist/` 被 `.gitignore` 忽略
 
 ## 5. openspec hygiene
 
-- [ ] 5.1 跑 `openspec validate add-frontend-skeleton --strict`，退出碼 0
-- [ ] 5.2 跑 `openspec status --change add-frontend-skeleton`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
-- [ ] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #4 通過、瀏覽器驗證跑過再 archive（避免在驗證前把 delta 併入主 spec）
+- [x] 5.1 跑 `openspec validate add-frontend-skeleton --strict`，退出碼 0
+- [x] 5.2 跑 `openspec status --change add-frontend-skeleton`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
+- [x] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #4 通過、瀏覽器驗證跑過再 archive（避免在驗證前把 delta 併入主 spec）
