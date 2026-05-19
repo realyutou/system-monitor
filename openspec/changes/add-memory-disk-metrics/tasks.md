@@ -23,12 +23,12 @@
 
 ## 3. 🟢 Green：在 `server.js` 內 inline 加 `/api/metrics/disk`
 
-- [ ] 3.1 在 memory 分支之後、404 fallback 之前新增 `if (req.method === 'GET' && req.url === '/api/metrics/disk') { ... return }` 分支
-- [ ] 3.2 在 `server.js` top-level 新增 `const FS_TYPES = new Set(['apfs', 'ext4', 'ext3', 'ext2', 'xfs', 'btrfs', 'zfs', 'ntfs', 'vfat', 'exfat']);`
-- [ ] 3.3 分支內 `try { const fs = await si.fsSize(); const mounts = fs.filter((m) => FS_TYPES.has(m.type) && m.size > 0 && !m.mount.startsWith('/System/Volumes/')).map((m) => ({ fs: m.fs, usedBytes: m.used, totalBytes: m.size, usagePercent: m.use })); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ mounts })); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'disk sample failed' })); }`
-- [ ] 3.4 執行 `npm test -- disk`，4 個 case 全綠
-- [ ] 3.5 執行 `npm test`，healthz / cpu / memory / disk 全綠（無 regression）
-- [ ] 3.6 commit，訊息標註 `stage 3 (green/disk): GET /api/metrics/disk returns filtered fsSize mounts`
+- [x] 3.1 在 memory 分支之後、404 fallback 之前新增 `if (req.method === 'GET' && req.url === '/api/metrics/disk') { ... return }` 分支
+- [x] 3.2 在 `server.js` top-level 新增 `const FS_TYPES = new Set(['apfs', 'ext4', 'ext3', 'ext2', 'xfs', 'btrfs', 'zfs', 'ntfs', 'vfat', 'exfat']);`
+- [x] 3.3 分支內 `try { const fs = await si.fsSize(); const mounts = fs.filter((m) => FS_TYPES.has(m.type?.toLowerCase()) && m.size > 0 && !m.mount.startsWith('/System/Volumes/')).map((m) => ({ fs: m.fs, usedBytes: m.used, totalBytes: m.size, usagePercent: m.use })); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ mounts })); } catch { res.writeHead(500, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'disk sample failed' })); }` — `m.type?.toLowerCase()` 以涵蓋 macOS 大寫 type
+- [x] 3.4 執行 `npm test -- disk`，4 個 case 全綠
+- [x] 3.5 執行 `npm test`，healthz / cpu / memory / disk 全綠（無 regression）
+- [x] 3.6 commit，訊息標註 `stage 3 (green/disk): GET /api/metrics/disk returns filtered fsSize mounts`
 
 ## 4. ♻️ Refactor：抽 `server/metricsRouter.js` 並統一錯誤格式
 

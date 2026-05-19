@@ -32,7 +32,8 @@ The backend SHALL expose `GET /api/metrics/disk` returning HTTP 200 with a JSON
 body of shape `{ mounts: Array<{ fs: string, usedBytes: integer ≥ 0, totalBytes: integer ≥ 1, usagePercent: number ∈ [0, 100] }> }`
 and `Content-Type: application/json`, so the frontend (later phases) can render
 per-mount disk usage. The `mounts[]` array MUST exclude entries whose filesystem
-type is not one of `{apfs, ext4, ext3, ext2, xfs, btrfs, zfs, ntfs, vfat, exfat}`,
+type (compared case-insensitively) is not one of
+`{apfs, ext4, ext3, ext2, xfs, btrfs, zfs, ntfs, vfat, exfat}`,
 entries with reported size `0`, and entries whose mount path begins with
 `/System/Volumes/` (macOS firmlink / snapshot pseudo-mounts), so reviewers see
 only real persistent storage devices.
@@ -49,7 +50,7 @@ only real persistent storage devices.
 - **AND** every element of `mounts` MUST satisfy `usedBytes <= totalBytes`
 
 #### Scenario: Disk filter excludes non-storage and pseudo-mounts
-- **WHEN** `systeminformation.fsSize()` returns an entry whose `type` is not in the allowlist (`apfs / ext4 / ext3 / ext2 / xfs / btrfs / zfs / ntfs / vfat / exfat`)
+- **WHEN** `systeminformation.fsSize()` returns an entry whose `type` (compared case-insensitively) is not in the allowlist (`apfs / ext4 / ext3 / ext2 / xfs / btrfs / zfs / ntfs / vfat / exfat`)
 - **THEN** that entry MUST NOT appear in `mounts[]`
 - **AND** an entry with `size === 0` MUST NOT appear in `mounts[]`
 - **AND** an entry whose `mount` path begins with `/System/Volumes/` MUST NOT appear in `mounts[]`

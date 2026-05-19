@@ -77,7 +77,7 @@ const FS_TYPES = new Set(['apfs', 'ext4', 'ext3', 'ext2', 'xfs', 'btrfs', 'zfs',
 const fs = await si.fsSize();
 return {
   mounts: fs
-    .filter((m) => FS_TYPES.has(m.type) && m.size > 0 && !m.mount.startsWith('/System/Volumes/'))
+    .filter((m) => FS_TYPES.has(m.type?.toLowerCase()) && m.size > 0 && !m.mount.startsWith('/System/Volumes/'))
     .map((m) => ({
       fs: m.fs,
       usedBytes: m.used,
@@ -86,6 +86,8 @@ return {
     })),
 };
 ```
+
+**注意**：type 比對 `toLowerCase()` 後再查 set；`systeminformation` 在 macOS 回傳 `'APFS'`（大寫）、Linux 回傳 `'ext4'`（小寫），normalize 後 allowlist 保持單一 source of truth。
 
 **為何**：
 
