@@ -20,7 +20,7 @@ If a request conflicts with the constitution, **amend the constitution first via
 
 - **TDD is mandatory.** Every code change starts with a failing test (Vitest / Supertest / React Testing Library). Skipping the test must be explicit and justified in the commit (e.g., pure visual/RWD tweak). See `docs/mission.md` §品質原則.
 - **Tech stack is pinned.** React 18 + TypeScript + Vite + Recharts on the frontend; Node.js 20 + `systeminformation` (with `node:os` fallback) on the backend; Vitest + Supertest + RTL for tests. Do not propose alternatives — open a constitution amendment instead.
-- **HTTP framework is intentionally undecided.** Roadmap stage 1 (`/healthz`) is the moment Express / Fastify / `node:http` gets chosen. Until then, don't pre-commit to one.
+- **HTTP framework is `node:http`.** `server.js` exports a `createServer()` factory returning `http.Server` so Supertest can hit it without opening a port; `node server.js` is what actually `listen()`s on `PORT = 3001`. Preserve this split when adding routes.
 - **Polling first.** Default to `GET /api/metrics/*` polling at 2s. Only escalate to SSE/WebSocket if a documented budget (`docs/tech-stack.md` §效能預算) is exceeded.
 
 ## Spec-driven workflow (openspec)
@@ -47,11 +47,14 @@ Each implementation phase from `docs/roadmap.md` should become its own openspec 
 
 ## Running the project
 
-There is no `package.json` yet. The two end-state commands reviewers will run (per `BACKGROUND.md`) are:
+Backend lives at the repo root (`server.js`); a frontend Vite app does not exist yet (lands in roadmap stage 4).
 
 ```bash
-node server.js   # backend
-npm start        # frontend
+npm start                       # node server.js — listens on :3001
+npm test                        # vitest run (one-shot, used by CI / reviewers)
+npm run test:watch              # vitest in watch mode for TDD loops
+npm test -- healthz             # run a single test file by name fragment
+curl -s localhost:3001/healthz  # smoke-test stage 1 verification
 ```
 
-These will become real once roadmap stages 1 and 4 land. Per-phase verification commands (e.g., `npm test -- healthz`, `curl -s localhost:3001/healthz`) are listed in `docs/roadmap.md`.
+The two reviewer-facing commands from `BACKGROUND.md` are `node server.js` (backend) and `npm start` (frontend, not yet wired — currently aliased to the backend). Per-phase verification commands are listed in `docs/roadmap.md` and each new roadmap phase MUST land as its own openspec change before code is touched.

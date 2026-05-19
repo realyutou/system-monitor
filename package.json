@@ -1,0 +1,17 @@
+{
+  "name": "system-monitor",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "supertest": "^6",
+    "vitest": "^1"
+  }
+}

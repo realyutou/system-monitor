@@ -20,7 +20,7 @@
 - **指標來源**：
   - **首選**：[`systeminformation`](https://www.npmjs.com/package/systeminformation)。跨平台、回傳結構穩定、CPU / memory / disk 一站搞定。
   - **Fallback**：Node 內建 `node:os`（如 `os.cpus()`、`os.freemem()`、`os.totalmem()`），用於 `systeminformation` 不可用或安裝失敗時的退路。
-- **HTTP 框架**：**待 roadmap 階段 1（`/healthz`）敲定**。候選包含 Express、Fastify、或直接 `node:http`。決策時機之所以延後，是因為它取決於我們是否願意引入第一個 runtime 相依；在那之前不預設答案。
+- **HTTP 框架**：**`node:http`（2026-05-19 在 `add-healthz` change 中敲定）**。`server.js` 匯出 `createServer()` 工廠回傳 `http.Server`，Supertest 直接吃 server 物件、`node server.js` 才 listen `PORT = 3001`。選定理由與替代方案見 §取捨記錄〈為何不選 Express / Fastify〉。
 - **測試**：
   - **Test runner**：Vitest（與前端共用，降低設定面積）。
   - **API 測試**：Supertest（直接對 Express / `http.Server` 物件呼叫，不需起真實 port）。
@@ -54,6 +54,10 @@
 ### 為何不選 Chart.js
 
 Chart.js 本身輕量好用，但它以 Canvas 為主、React 整合需要 `react-chartjs-2` 等 wrapper、且元件式組合性較弱。Recharts 是「React 為一等公民」的 SVG 圖表庫，元件可組合、props 即資料模型、對 React Testing Library 與 snapshot 都更友善，貼合本專案以 React 為主的測試策略。
+
+### 為何不選 Express / Fastify
+
+Express 對 reviewer 熟悉度最高，但它把 middleware 慣例與 router 抽象一次塞進來，對只有四條 route（`/healthz` + 三條 metric）的 demo 太重；Fastify 的型別與 schema 驗證優勢在後端不上 TS 的本專案也用不到。`node:http` 0 runtime 相依、Supertest 直接吃 `http.Server`、與本專案「自己用 Node.js 採集、自己畫圖」的展示重點一致。若未來路由規模真的擴大（或需要 auth / rate limiting）再評估升級。
 
 ### 為何不選 Jest
 
