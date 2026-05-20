@@ -16,7 +16,7 @@ export function CpuChart({
     <div data-testid="cpu-chart" role="img" aria-label="CPU usage chart">
       <LineChart width={width} height={height} data={data}>
         <XAxis dataKey="time" type="number" domain={['dataMin', 'dataMax']} />
-        <YAxis domain={[0, 100]} />
+        <YAxis domain={[0, 100]} width={100} />
         <Line type="monotone" dataKey="usage" dot={{ r: 4 }} />
       </LineChart>
     </div>
