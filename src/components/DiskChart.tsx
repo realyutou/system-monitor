@@ -17,7 +17,13 @@ export function DiskChart({
     <div className={styles.chartCard}>
       <h3 className={styles.chartTitle}>Disk Usage</h3>
       <div data-testid="disk-chart" role="img" aria-label="Disk usage chart">
-        <BarChart layout="vertical" width={width} height={height} data={data}>
+        <BarChart
+          layout="vertical"
+          width={width}
+          height={height}
+          data={data}
+          margin={{ top: 8, right: 24, bottom: 8, left: 8 }}
+        >
           <XAxis
             type="number"
             domain={[0, 100]}

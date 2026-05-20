@@ -772,77 +772,145 @@ The roadmap phase #8 verification command SHALL be supported by scenario-named t
 
 ### Requirement: CpuChart X axis renders at most 5 evenly spaced timestamp ticks
 
-`<CpuChart />` SHALL pass an explicit `ticks` prop to its `<XAxis>` so that the displayed X-axis tick count does not depend on Recharts' automatic tick computation. The `ticks` array MUST be computed by calling `computeTimeTicks(data.map((row) => row.time), 5)`. The resulting array length MUST equal `Math.min(data.length, 5)`, and when `data.length > 5` the first and last entries MUST equal the first and last `time` values in `data` (so the visible tick range matches the data range).
+`<CpuChart />` SHALL pass an explicit `ticks` prop to its `<XAxis>` so that the displayed X-axis tick positions are anchored to wall-clock seconds and do not depend on Recharts' automatic tick computation. The `ticks` array MUST be computed by calling `computeAnchoredTimeTicks(min, max)` where `min` is the `time` value of the first row in `data` and `max` is the `time` value of the last row (when `data.length >= 1`); when `data.length === 0` the chart MUST pass `[]` as `ticks`. The resulting array MAY have between 0 and 5 entries inclusive depending on how many multiples of the anchoring step fall inside `[min, max]`. When the resulting array is empty, `<CpuChart />` MUST additionally pass `tick={false}` to its `<XAxis>` to suppress Recharts' fallback tick rendering; when the resulting array is non-empty, `<CpuChart />` MUST NOT pass `tick={false}`.
 
-#### Scenario: Five evenly spaced ticks for a nine-row fixture
+#### Scenario: Anchored ticks for a fixture spanning 60 seconds across two 15-second boundaries
 
-- **WHEN** a test renders `<CpuChart data={fixture} width={400} height={200} />` where `fixture` has exactly nine rows with strictly increasing `time` values
-- **THEN** for each of the row indices `0, 2, 4, 6, 8` the corresponding `formatChartTime(fixture[i].time)` string MUST appear in `container.textContent`
-- **AND** for each of the row indices `1, 3, 5, 7` the corresponding `formatChartTime(fixture[i].time)` string MUST NOT appear in `container.textContent`
+- **WHEN** a test renders `<CpuChart data={fixture} width={400} height={200} />` where `fixture` covers a range of at least 60 seconds (i.e. `fixture[fixture.length - 1].time - fixture[0].time >= 60_000`) and includes at least three multiples of 15 000 ms within `[fixture[0].time, fixture[fixture.length - 1].time]`
+- **THEN** `container.textContent` MUST contain `formatChartTime(t)` for at least three distinct anchored timestamps `t` where each `t` is a multiple of 15 000 ms and falls within the fixture's time range
+- **AND** `container.textContent` MUST NOT contain `formatChartTime(fixture[1].time)` when `fixture[1].time` is not a multiple of 15 000 ms
+- **AND** the `tick` prop on `<XAxis>` MUST NOT be `false`
 
-#### Scenario: All ticks shown when data has fewer than five rows
+#### Scenario: Empty data produces no X ticks
 
-- **WHEN** a test renders `<CpuChart data={fixture} width={400} height={200} />` where `fixture` has exactly three rows
-- **THEN** for each row index `0, 1, 2` the corresponding `formatChartTime(fixture[i].time)` string MUST appear in `container.textContent`
+- **WHEN** a test renders `<CpuChart data={[]} width={400} height={200} />`
+- **THEN** the chart MUST mount without throwing
+- **AND** `container.textContent` MUST NOT contain any `HH:MM:SS` substring matching `/\d{2}:\d{2}:\d{2}/`
+- **AND** the `tick` prop on `<XAxis>` MUST be `false`
+
+#### Scenario: Short-span data with no anchored multiple produces no X ticks
+
+- **WHEN** a test renders `<CpuChart data={fixture} width={400} height={200} />` where `fixture` covers a range strictly less than 15 000 ms AND no multiple of 15 000 ms falls within `[fixture[0].time, fixture[fixture.length - 1].time]`
+- **THEN** `container.textContent` MUST NOT contain any `HH:MM:SS` substring matching `/\d{2}:\d{2}:\d{2}/`
+- **AND** the `tick` prop on `<XAxis>` MUST be `false`
 
 ### Requirement: MemoryChart X axis renders at most 5 evenly spaced timestamp ticks
 
-`<MemoryChart />` SHALL pass an explicit `ticks` prop to its `<XAxis>` so that the displayed X-axis tick count does not depend on Recharts' automatic tick computation. The `ticks` array MUST be computed by calling `computeTimeTicks(data.map((row) => row.time), 5)`. The resulting array length MUST equal `Math.min(data.length, 5)`, and when `data.length > 5` the first and last entries MUST equal the first and last `time` values in `data`.
+`<MemoryChart />` SHALL pass an explicit `ticks` prop to its `<XAxis>` so that the displayed X-axis tick positions are anchored to wall-clock seconds and do not depend on Recharts' automatic tick computation. The `ticks` array MUST be computed by calling `computeAnchoredTimeTicks(min, max)` where `min` is the `time` value of the first row in `data` and `max` is the `time` value of the last row (when `data.length >= 1`); when `data.length === 0` the chart MUST pass `[]` as `ticks`. The resulting array MAY have between 0 and 5 entries inclusive depending on how many multiples of the anchoring step fall inside `[min, max]`. When the resulting array is empty, `<MemoryChart />` MUST additionally pass `tick={false}` to its `<XAxis>` to suppress Recharts' fallback tick rendering; when the resulting array is non-empty, `<MemoryChart />` MUST NOT pass `tick={false}`.
 
-#### Scenario: Five evenly spaced ticks for a nine-row fixture
+#### Scenario: Anchored ticks for a fixture spanning 60 seconds across two 15-second boundaries
 
-- **WHEN** a test renders `<MemoryChart data={fixture} width={400} height={200} />` where `fixture` has exactly nine rows with strictly increasing `time` values
-- **THEN** for each of the row indices `0, 2, 4, 6, 8` the corresponding `formatChartTime(fixture[i].time)` string MUST appear in `container.textContent`
-- **AND** for each of the row indices `1, 3, 5, 7` the corresponding `formatChartTime(fixture[i].time)` string MUST NOT appear in `container.textContent`
+- **WHEN** a test renders `<MemoryChart data={fixture} width={400} height={200} />` where `fixture` covers a range of at least 60 seconds (i.e. `fixture[fixture.length - 1].time - fixture[0].time >= 60_000`) and includes at least three multiples of 15 000 ms within `[fixture[0].time, fixture[fixture.length - 1].time]`
+- **THEN** `container.textContent` MUST contain `formatChartTime(t)` for at least three distinct anchored timestamps `t` where each `t` is a multiple of 15 000 ms and falls within the fixture's time range
+- **AND** `container.textContent` MUST NOT contain `formatChartTime(fixture[1].time)` when `fixture[1].time` is not a multiple of 15 000 ms
+- **AND** the `tick` prop on `<XAxis>` MUST NOT be `false`
 
-#### Scenario: All ticks shown when data has fewer than five rows
+#### Scenario: Empty data produces no X ticks
 
-- **WHEN** a test renders `<MemoryChart data={fixture} width={400} height={200} />` where `fixture` has exactly three rows
-- **THEN** for each row index `0, 1, 2` the corresponding `formatChartTime(fixture[i].time)` string MUST appear in `container.textContent`
+- **WHEN** a test renders `<MemoryChart data={[]} width={400} height={200} />`
+- **THEN** the chart MUST mount without throwing
+- **AND** `container.textContent` MUST NOT contain any `HH:MM:SS` substring matching `/\d{2}:\d{2}:\d{2}/`
+- **AND** the `tick` prop on `<XAxis>` MUST be `false`
 
-### Requirement: computeTimeTicks utility selects up to N evenly spaced values from a sorted numeric array
+#### Scenario: Short-span data with no anchored multiple produces no X ticks
 
-The frontend SHALL expose a pure function `computeTimeTicks(values: number[], count?: number): number[]` from `src/lib/computeTimeTicks.ts`. The function SHALL be pure (no `fetch`, no `setTimeout`, no module-scope mutation) so it can be unit-tested without mocking. The default value of `count` SHALL be `5`. The function assumes the input `values` array is sorted in ascending order; it SHALL NOT internally re-sort the array.
+- **WHEN** a test renders `<MemoryChart data={fixture} width={400} height={200} />` where `fixture` covers a range strictly less than 15 000 ms AND no multiple of 15 000 ms falls within `[fixture[0].time, fixture[fixture.length - 1].time]`
+- **THEN** `container.textContent` MUST NOT contain any `HH:MM:SS` substring matching `/\d{2}:\d{2}:\d{2}/`
+- **AND** the `tick` prop on `<XAxis>` MUST be `false`
+
+### Requirement: computeAnchoredTimeTicks utility selects multiples of a step within a numeric range
+
+The frontend SHALL expose a pure function `computeAnchoredTimeTicks(min: number, max: number, step?: number): number[]` from `src/lib/computeAnchoredTimeTicks.ts`. The function SHALL be pure (no `fetch`, no `setTimeout`, no module-scope mutation) so it can be unit-tested without mocking. The default value of `step` SHALL be `15_000` (representing 15 seconds when the inputs are millisecond timestamps).
 
 Selection rules:
-- If `values.length === 0`, the function MUST return an empty array.
-- If `values.length <= count`, the function MUST return a new array containing the same elements in the same order as `values`.
-- If `values.length > count`, the function MUST return an array of length exactly `count` whose first element equals `values[0]` and whose last element equals `values[values.length - 1]`; the intermediate `count - 2` elements MUST be selected from `values` at evenly spaced indices computed as `Math.round(((i * (values.length - 1)) / (count - 1)))` for `i` in `0..count-1`.
+- If `min` or `max` is not a finite number, or `max < min`, the function MUST return an empty array.
+- Otherwise, let `first = Math.ceil(min / step) * step` and `last = Math.floor(max / step) * step`. If `last < first`, the function MUST return an empty array.
+- Otherwise, the function MUST return an array containing each multiple of `step` in the closed interval `[first, last]`, listed in ascending order with stride `step`.
 
-#### Scenario: Empty input yields empty output
+#### Scenario: Non-finite inputs yield empty output
 
-- **WHEN** `computeTimeTicks([])` is called
+- **WHEN** `computeAnchoredTimeTicks(NaN, 0)`, `computeAnchoredTimeTicks(0, NaN)`, or `computeAnchoredTimeTicks(Infinity, 0)` is called
 - **THEN** the return value MUST be an array of length 0
 
-#### Scenario: Single-element input is preserved
+#### Scenario: Inverted range yields empty output
 
-- **WHEN** `computeTimeTicks([10])` is called
-- **THEN** the return value MUST deep-equal `[10]`
+- **WHEN** `computeAnchoredTimeTicks(100, 50)` is called
+- **THEN** the return value MUST be an array of length 0
 
-#### Scenario: Input length equal to count is returned unchanged
+#### Scenario: Range narrower than one step yields empty output
 
-- **WHEN** `computeTimeTicks([1, 2, 3, 4, 5], 5)` is called
-- **THEN** the return value MUST deep-equal `[1, 2, 3, 4, 5]`
+- **WHEN** `computeAnchoredTimeTicks(1_000, 14_000, 15_000)` is called
+- **THEN** the return value MUST be an array of length 0
 
-#### Scenario: Input length below default count is returned unchanged
+#### Scenario: Range covering exactly one multiple yields one tick
 
-- **WHEN** `computeTimeTicks([1, 2, 3])` is called (default `count = 5`)
-- **THEN** the return value MUST deep-equal `[1, 2, 3]`
+- **WHEN** `computeAnchoredTimeTicks(10_000, 20_000, 15_000)` is called
+- **THEN** the return value MUST deep-equal `[15_000]`
 
-#### Scenario: Nine values produce five evenly spaced picks
+#### Scenario: Range covering multiple step multiples returns each one in order
 
-- **WHEN** `computeTimeTicks([1, 2, 3, 4, 5, 6, 7, 8, 9])` is called (default `count = 5`)
-- **THEN** the return value MUST deep-equal `[1, 3, 5, 7, 9]`
+- **WHEN** `computeAnchoredTimeTicks(7_000, 64_000, 15_000)` is called
+- **THEN** the return value MUST deep-equal `[15_000, 30_000, 45_000, 60_000]`
 
-#### Scenario: Endpoints are always included for inputs larger than count
+#### Scenario: Range aligned exactly on step boundaries includes both endpoints
 
-- **WHEN** `computeTimeTicks(values, count)` is called with `values.length > count` and `count >= 2`
-- **THEN** the return value's first element MUST equal `values[0]`
-- **AND** the return value's last element MUST equal `values[values.length - 1]`
-- **AND** the return value's length MUST equal `count`
+- **WHEN** `computeAnchoredTimeTicks(15_000, 60_000, 15_000)` is called
+- **THEN** the return value MUST deep-equal `[15_000, 30_000, 45_000, 60_000]`
 
-#### Scenario: Function is pure (does not mutate its input)
+#### Scenario: Default step is 15_000
 
-- **WHEN** `computeTimeTicks(values)` is called with any `values` array
-- **THEN** after the call, the `values` array MUST be deep-equal to the value it held before the call
+- **WHEN** `computeAnchoredTimeTicks(0, 60_000)` is called without passing `step`
+- **THEN** the return value MUST deep-equal `[0, 15_000, 30_000, 45_000, 60_000]`
+
+#### Scenario: Function is pure (does not mutate inputs)
+
+- **WHEN** `computeAnchoredTimeTicks(min, max, step)` is called with any finite arguments
+- **THEN** after the call, the caller's local variables `min`, `max`, `step` MUST hold the same numeric values they held before the call
+
+### Requirement: CpuChart wraps its LineChart in a margin that prevents axis-label clipping
+
+`<CpuChart />` SHALL pass a `margin` prop to its `<LineChart>` whose `right` entry is at least `16` pixels and whose `left` entry is at least `4` pixels, so that the leftmost Y-axis tick (`0 %`) does not visually collide with the first X-axis tick and the rightmost X-axis tick (`HH:MM:SS`) is not clipped by the SVG viewport.
+
+#### Scenario: LineChart margin.right is at least 16
+
+- **WHEN** a reviewer reads `src/components/CpuChart.tsx` and extracts the `margin` prop passed to `<LineChart>`
+- **THEN** the prop value MUST be an object whose `right` property is a number greater than or equal to `16`
+- **AND** the prop value's `left` property MUST be a number greater than or equal to `4`
+
+### Requirement: MemoryChart wraps its LineChart in a margin that prevents axis-label clipping
+
+`<MemoryChart />` SHALL pass a `margin` prop to its `<LineChart>` whose `right` entry is at least `16` pixels and whose `left` entry is at least `4` pixels, so that the leftmost Y-axis tick (`0 %`) does not visually collide with the first X-axis tick and the rightmost X-axis tick (`HH:MM:SS`) is not clipped by the SVG viewport.
+
+#### Scenario: LineChart margin.right is at least 16
+
+- **WHEN** a reviewer reads `src/components/MemoryChart.tsx` and extracts the `margin` prop passed to `<LineChart>`
+- **THEN** the prop value MUST be an object whose `right` property is a number greater than or equal to `16`
+- **AND** the prop value's `left` property MUST be a number greater than or equal to `4`
+
+### Requirement: DiskChart wraps its BarChart in a margin that prevents axis-label clipping
+
+`<DiskChart />` SHALL pass a `margin` prop to its `<BarChart>` whose `right` entry is at least `16` pixels, so that the rightmost X-axis tick (`100 %`) is not clipped by the SVG viewport.
+
+#### Scenario: BarChart margin.right is at least 16
+
+- **WHEN** a reviewer reads `src/components/DiskChart.tsx` and extracts the `margin` prop passed to `<BarChart>`
+- **THEN** the prop value MUST be an object whose `right` property is a number greater than or equal to `16`
+
+### Requirement: CpuChart XAxis padding separates the first data point from the Y axis
+
+`<CpuChart />` SHALL pass a `padding` prop to its `<XAxis>` whose `left` entry is at least `8` pixels, so that the leftmost data point and its associated X-axis tick label do not visually overlap with the Y-axis labels.
+
+#### Scenario: XAxis padding.left is at least 8
+
+- **WHEN** a reviewer reads `src/components/CpuChart.tsx` and extracts the `padding` prop passed to `<XAxis>`
+- **THEN** the prop value MUST be an object whose `left` property is a number greater than or equal to `8`
+
+### Requirement: MemoryChart XAxis padding separates the first data point from the Y axis
+
+`<MemoryChart />` SHALL pass a `padding` prop to its `<XAxis>` whose `left` entry is at least `8` pixels, so that the leftmost data point and its associated X-axis tick label do not visually overlap with the Y-axis labels.
+
+#### Scenario: XAxis padding.left is at least 8
+
+- **WHEN** a reviewer reads `src/components/MemoryChart.tsx` and extracts the `padding` prop passed to `<XAxis>`
+- **THEN** the prop value MUST be an object whose `left` property is a number greater than or equal to `8`
 

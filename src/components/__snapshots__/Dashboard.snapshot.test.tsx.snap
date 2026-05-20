@@ -37,10 +37,10 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 id="recharts1-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -53,13 +53,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -73,13 +73,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -88,13 +88,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -108,16 +108,16 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -128,31 +128,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -164,31 +164,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -200,31 +200,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -236,31 +236,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -272,31 +272,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -315,14 +315,14 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
-                  cy="155.8"
+                  cx="342"
+                  cy="155.32000000000002"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -361,10 +361,10 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 id="recharts4-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -377,13 +377,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -397,13 +397,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -412,13 +412,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -432,16 +432,16 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -452,31 +452,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -488,31 +488,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -524,31 +524,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -560,31 +560,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -596,31 +596,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -639,14 +639,14 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
+                  cx="342"
                   cy="135"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -685,10 +685,10 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 id="recharts7-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -701,13 +701,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -721,13 +721,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="105"
-                    x2="105"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="108"
+                    x2="108"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -736,13 +736,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="105"
-                    y="273"
+                    width="468"
+                    x="108"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="105"
+                      x="108"
                     >
                       0 %
                     </tspan>
@@ -757,13 +757,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="227.5"
-                    x2="227.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="225"
+                    x2="225"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -772,13 +772,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="227.5"
-                    y="273"
+                    width="468"
+                    x="225"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="227.5"
+                      x="225"
                     >
                       25 %
                     </tspan>
@@ -793,13 +793,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -808,13 +808,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       50 %
                     </tspan>
@@ -829,13 +829,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="472.5"
-                    x2="472.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="459"
+                    x2="459"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -844,13 +844,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="472.5"
-                    y="273"
+                    width="468"
+                    x="459"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="472.5"
+                      x="459"
                     >
                       75 %
                     </tspan>
@@ -865,13 +865,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="595"
-                    x2="595"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="576"
+                    x2="576"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -880,13 +880,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="595"
-                    y="273"
+                    width="468"
+                    x="576"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="595"
+                      x="576"
                     >
                       100 %
                     </tspan>
@@ -900,16 +900,16 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -920,31 +920,31 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       /
                     </tspan>
@@ -963,13 +963,13 @@ exports[`<Dashboard /> responsive snapshots > matches the desktop viewport snaps
                 >
                   <path
                     class="recharts-rectangle"
-                    d="M 105,31 h 294 v 208 h -294 Z"
+                    d="M 108,33.4 h 280.79999999999995 v 203 h -280.79999999999995 Z"
                     fill="#9affc6"
-                    height="208"
+                    height="203"
                     radius="0"
-                    width="294"
-                    x="105"
-                    y="31"
+                    width="280.79999999999995"
+                    x="108"
+                    y="33.4"
                   />
                 </g>
               </g>
@@ -1027,10 +1027,10 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 id="recharts25-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -1043,13 +1043,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1063,13 +1063,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1078,13 +1078,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -1098,16 +1098,16 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1118,31 +1118,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -1154,31 +1154,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -1190,31 +1190,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -1226,31 +1226,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -1262,31 +1262,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -1305,14 +1305,14 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
-                  cy="155.8"
+                  cx="342"
+                  cy="155.32000000000002"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -1351,10 +1351,10 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 id="recharts28-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -1367,13 +1367,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1387,13 +1387,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1402,13 +1402,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -1422,16 +1422,16 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1442,31 +1442,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -1478,31 +1478,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -1514,31 +1514,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -1550,31 +1550,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -1586,31 +1586,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -1629,14 +1629,14 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
+                  cx="342"
                   cy="135"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -1675,10 +1675,10 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 id="recharts31-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -1691,13 +1691,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1711,13 +1711,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="105"
-                    x2="105"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="108"
+                    x2="108"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1726,13 +1726,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="105"
-                    y="273"
+                    width="468"
+                    x="108"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="105"
+                      x="108"
                     >
                       0 %
                     </tspan>
@@ -1747,13 +1747,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="227.5"
-                    x2="227.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="225"
+                    x2="225"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1762,13 +1762,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="227.5"
-                    y="273"
+                    width="468"
+                    x="225"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="227.5"
+                      x="225"
                     >
                       25 %
                     </tspan>
@@ -1783,13 +1783,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1798,13 +1798,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       50 %
                     </tspan>
@@ -1819,13 +1819,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="472.5"
-                    x2="472.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="459"
+                    x2="459"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1834,13 +1834,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="472.5"
-                    y="273"
+                    width="468"
+                    x="459"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="472.5"
+                      x="459"
                     >
                       75 %
                     </tspan>
@@ -1855,13 +1855,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="595"
-                    x2="595"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="576"
+                    x2="576"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -1870,13 +1870,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="595"
-                    y="273"
+                    width="468"
+                    x="576"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="595"
+                      x="576"
                     >
                       100 %
                     </tspan>
@@ -1890,16 +1890,16 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -1910,31 +1910,31 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       /
                     </tspan>
@@ -1953,13 +1953,13 @@ exports[`<Dashboard /> responsive snapshots > matches the mobile viewport snapsh
                 >
                   <path
                     class="recharts-rectangle"
-                    d="M 105,31 h 294 v 208 h -294 Z"
+                    d="M 108,33.4 h 280.79999999999995 v 203 h -280.79999999999995 Z"
                     fill="#9affc6"
-                    height="208"
+                    height="203"
                     radius="0"
-                    width="294"
-                    x="105"
-                    y="31"
+                    width="280.79999999999995"
+                    x="108"
+                    y="33.4"
                   />
                 </g>
               </g>
@@ -2017,10 +2017,10 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 id="recharts13-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -2033,13 +2033,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2053,13 +2053,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2068,13 +2068,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -2088,16 +2088,16 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2108,31 +2108,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -2144,31 +2144,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -2180,31 +2180,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -2216,31 +2216,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -2252,31 +2252,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -2295,14 +2295,14 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
-                  cy="155.8"
+                  cx="342"
+                  cy="155.32000000000002"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -2341,10 +2341,10 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 id="recharts16-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -2357,13 +2357,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2377,13 +2377,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2392,13 +2392,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       18:00:00
                     </tspan>
@@ -2412,16 +2412,16 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2432,31 +2432,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="265"
-                    y2="265"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="262"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="265"
+                    x="100"
+                    y="262"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       0 %
                     </tspan>
@@ -2468,31 +2468,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="200"
-                    y2="200"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="198.5"
+                    y2="198.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="200"
+                    x="100"
+                    y="198.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       25 %
                     </tspan>
@@ -2504,31 +2504,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       50 %
                     </tspan>
@@ -2540,31 +2540,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="70"
-                    y2="70"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="71.5"
+                    y2="71.5"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="70"
+                    x="100"
+                    y="71.5"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       75 %
                     </tspan>
@@ -2576,31 +2576,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
-                    y1="5"
-                    y2="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
+                    y1="8"
+                    y2="8"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
-                    y="5"
+                    x="100"
+                    y="8"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       100 %
                     </tspan>
@@ -2619,14 +2619,14 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
               >
                 <circle
                   class="recharts-dot recharts-line-dot"
-                  cx="350"
+                  cx="342"
                   cy="135"
                   fill="#fff"
-                  height="260"
+                  height="254"
                   r="4"
                   stroke="#3182bd"
                   stroke-width="1"
-                  width="490"
+                  width="468"
                 />
               </g>
             </g>
@@ -2665,10 +2665,10 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 id="recharts19-clip"
               >
                 <rect
-                  height="260"
-                  width="490"
-                  x="105"
-                  y="5"
+                  height="254"
+                  width="468"
+                  x="108"
+                  y="8"
                 />
               </clippath>
             </defs>
@@ -2681,13 +2681,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 height="30"
                 orientation="bottom"
                 stroke="#666"
-                width="490"
-                x="105"
-                x1="105"
-                x2="595"
-                y="265"
-                y1="265"
-                y2="265"
+                width="468"
+                x="108"
+                x1="108"
+                x2="576"
+                y="262"
+                y1="262"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2701,13 +2701,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="105"
-                    x2="105"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="108"
+                    x2="108"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2716,13 +2716,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="105"
-                    y="273"
+                    width="468"
+                    x="108"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="105"
+                      x="108"
                     >
                       0 %
                     </tspan>
@@ -2737,13 +2737,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="227.5"
-                    x2="227.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="225"
+                    x2="225"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2752,13 +2752,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="227.5"
-                    y="273"
+                    width="468"
+                    x="225"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="227.5"
+                      x="225"
                     >
                       25 %
                     </tspan>
@@ -2773,13 +2773,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="350"
-                    x2="350"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="342"
+                    x2="342"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2788,13 +2788,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="350"
-                    y="273"
+                    width="468"
+                    x="342"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="350"
+                      x="342"
                     >
                       50 %
                     </tspan>
@@ -2809,13 +2809,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="472.5"
-                    x2="472.5"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="459"
+                    x2="459"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2824,13 +2824,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="472.5"
-                    y="273"
+                    width="468"
+                    x="459"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="472.5"
+                      x="459"
                     >
                       75 %
                     </tspan>
@@ -2845,13 +2845,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     height="30"
                     orientation="bottom"
                     stroke="#666"
-                    width="490"
-                    x="105"
-                    x1="595"
-                    x2="595"
-                    y="265"
-                    y1="271"
-                    y2="265"
+                    width="468"
+                    x="108"
+                    x1="576"
+                    x2="576"
+                    y="262"
+                    y1="268"
+                    y2="262"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
@@ -2860,13 +2860,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                     orientation="bottom"
                     stroke="none"
                     text-anchor="middle"
-                    width="490"
-                    x="595"
-                    y="273"
+                    width="468"
+                    x="576"
+                    y="270"
                   >
                     <tspan
                       dy="0.71em"
-                      x="595"
+                      x="576"
                     >
                       100 %
                     </tspan>
@@ -2880,16 +2880,16 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
               <line
                 class="recharts-cartesian-axis-line"
                 fill="none"
-                height="260"
+                height="254"
                 orientation="left"
                 stroke="#666"
                 width="100"
-                x="5"
-                x1="105"
-                x2="105"
-                y="5"
-                y1="5"
-                y2="265"
+                x="8"
+                x1="108"
+                x2="108"
+                y="8"
+                y1="8"
+                y2="262"
               />
               <g
                 class="recharts-cartesian-axis-ticks"
@@ -2900,31 +2900,31 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                   <line
                     class="recharts-cartesian-axis-tick-line"
                     fill="none"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="#666"
                     width="100"
-                    x="5"
-                    x1="99"
-                    x2="105"
-                    y="5"
+                    x="8"
+                    x1="102"
+                    x2="108"
+                    y="8"
                     y1="135"
                     y2="135"
                   />
                   <text
                     class="recharts-text recharts-cartesian-axis-tick-value"
                     fill="#666"
-                    height="260"
+                    height="254"
                     orientation="left"
                     stroke="none"
                     text-anchor="end"
                     width="100"
-                    x="97"
+                    x="100"
                     y="135"
                   >
                     <tspan
                       dy="0.355em"
-                      x="97"
+                      x="100"
                     >
                       /
                     </tspan>
@@ -2943,13 +2943,13 @@ exports[`<Dashboard /> responsive snapshots > matches the tablet viewport snapsh
                 >
                   <path
                     class="recharts-rectangle"
-                    d="M 105,31 h 294 v 208 h -294 Z"
+                    d="M 108,33.4 h 280.79999999999995 v 203 h -280.79999999999995 Z"
                     fill="#9affc6"
-                    height="208"
+                    height="203"
                     radius="0"
-                    width="294"
-                    x="105"
-                    y="31"
+                    width="280.79999999999995"
+                    x="108"
+                    y="33.4"
                   />
                 </g>
               </g>

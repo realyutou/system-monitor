@@ -1,7 +1,7 @@
 import { Children, isValidElement, type ReactElement } from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { XAxis } from 'recharts';
+import { BarChart, XAxis } from 'recharts';
 import { DiskChart } from './DiskChart';
 import { disk } from './DiskChart.fixtures';
 
@@ -16,6 +16,29 @@ function findAxisTickFormatter(
       const formatter = (node.props as { tickFormatter?: (v: number) => string })
         .tickFormatter;
       if (formatter) found = formatter;
+    }
+    const children = (node.props as { children?: unknown }).children;
+    Children.forEach(children, visit);
+  };
+  visit(element);
+  return found;
+}
+
+function findChartProp(
+  element: ReactElement,
+  chartType: typeof BarChart,
+  propName: string,
+): unknown {
+  if (!isValidElement(element)) return undefined;
+  if (element.type === chartType) {
+    return (element.props as Record<string, unknown>)[propName];
+  }
+  let found: unknown;
+  const visit = (node: unknown) => {
+    if (!isValidElement(node)) return;
+    if (node.type === chartType) {
+      found = (node.props as Record<string, unknown>)[propName];
+      return;
     }
     const children = (node.props as { children?: unknown }).children;
     Children.forEach(children, visit);
@@ -64,5 +87,14 @@ describe('<DiskChart />', () => {
       text.includes(tick),
     );
     expect(matches).toBe(true);
+  });
+
+  it('passes BarChart margin.right >= 16', () => {
+    const element = DiskChart({ data: disk.idle, width: 400, height: 200 });
+    const margin = findChartProp(element, BarChart, 'margin') as
+      | { right?: number }
+      | undefined;
+    expect(margin).toBeDefined();
+    expect(margin!.right).toBeGreaterThanOrEqual(16);
   });
 });
