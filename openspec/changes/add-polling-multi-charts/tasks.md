@@ -192,7 +192,7 @@
     - 主視覺三張圖：CPU LineChart 每 2s 多一點（最多 30 點後窗口前進）、Memory LineChart 同步、Disk BarChart 每 2s 重渲一次（mount usagePercent 變動可能微小）
     - DevTools Network：`/api/metrics/cpu`、`/api/metrics/memory`、`/api/metrics/disk` 各自每 2s 被請求一次
 - [ ] 4.6 暫停 terminal A 後端（Ctrl+C），不重整瀏覽器：三張圖容器仍 mount，各自顯示 error notice；恢復 backend、重整後三張圖再開始累積資料
-- [ ] 4.7 在 terminal B 改用 `VITE_POLL_INTERVAL_MS=500 npm start`，瀏覽器重整、DevTools Network 量到 fetch 間隔 ≈ 500ms（驗證 env override）；驗完後恢復預設
+- [x] 4.7 在 terminal B 改用 `VITE_POLL_INTERVAL_MS=500 npm start`，瀏覽器重整、DevTools Network 量到 fetch 間隔 ≈ 500ms（驗證 env override）；驗完後恢復預設
 - [x] 4.8 跑 `npm run build`，退出碼 0（Vite production build 仍能 compile）
 
 ## 5. openspec hygiene
