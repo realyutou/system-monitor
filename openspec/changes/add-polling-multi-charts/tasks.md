@@ -185,20 +185,20 @@
 
 - [x] 4.1 跑 `npm test -- polling`，退出碼 0（涵蓋 useMetricPolling 6 個 case + App polling 1 個 case）
 - [x] 4.2 跑 `npm test`，退出碼 0（全部測試，含後端 4 支 + 前端所有新增 / 修改的案例）
-- [ ] 4.3 開 terminal A 跑 `node server.js`，`:3001` 啟動成功
-- [ ] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 dev URL
-- [ ] 4.5 瀏覽器開 Vite dev URL，肉眼確認：
+- [x] 4.3 開 terminal A 跑 `node server.js`，`:3001` 啟動成功
+- [x] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 dev URL
+- [x] 4.5 瀏覽器開 Vite dev URL，肉眼確認：
     - Header 右上「Backend: ok」徽章常駐
     - 主視覺三張圖：CPU LineChart 每 2s 多一點（最多 30 點後窗口前進）、Memory LineChart 同步、Disk BarChart 每 2s 重渲一次（mount usagePercent 變動可能微小）
     - DevTools Network：`/api/metrics/cpu`、`/api/metrics/memory`、`/api/metrics/disk` 各自每 2s 被請求一次
-- [ ] 4.6 暫停 terminal A 後端（Ctrl+C），不重整瀏覽器：三張圖容器仍 mount，各自顯示 error notice；恢復 backend、重整後三張圖再開始累積資料
+- [x] 4.6 暫停 terminal A 後端（Ctrl+C），不重整瀏覽器：三張圖容器仍 mount，各自顯示 error notice；恢復 backend、重整後三張圖再開始累積資料
 - [x] 4.7 在 terminal B 改用 `VITE_POLL_INTERVAL_MS=500 npm start`，瀏覽器重整、DevTools Network 量到 fetch 間隔 ≈ 500ms（驗證 env override）；驗完後恢復預設
 - [x] 4.8 跑 `npm run build`，退出碼 0（Vite production build 仍能 compile）
 
 ## 5. openspec hygiene
 
 - [x] 5.1 跑 `openspec validate add-polling-multi-charts --strict`，退出碼 0
-- [ ] 5.2 跑 `openspec status --change add-polling-multi-charts`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
+- [x] 5.2 跑 `openspec status --change add-polling-multi-charts`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
 - [ ] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #6 通過、瀏覽器驗證 4.5–4.7 都跑過再 archive
 
 ## 6. 🔁 Refinement during phase 6 verification（reviewer 反映後就地修）
