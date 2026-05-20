@@ -183,8 +183,8 @@
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #6 驗證指令）
 
-- [ ] 4.1 跑 `npm test -- polling`，退出碼 0（涵蓋 useMetricPolling 6 個 case + App polling 1 個 case）
-- [ ] 4.2 跑 `npm test`，退出碼 0（全部測試，含後端 4 支 + 前端所有新增 / 修改的案例）
+- [x] 4.1 跑 `npm test -- polling`，退出碼 0（涵蓋 useMetricPolling 6 個 case + App polling 1 個 case）
+- [x] 4.2 跑 `npm test`，退出碼 0（全部測試，含後端 4 支 + 前端所有新增 / 修改的案例）
 - [ ] 4.3 開 terminal A 跑 `node server.js`，`:3001` 啟動成功
 - [ ] 4.4 開 terminal B 跑 `npm start`，Vite log 顯示 dev URL
 - [ ] 4.5 瀏覽器開 Vite dev URL，肉眼確認：
@@ -193,10 +193,39 @@
     - DevTools Network：`/api/metrics/cpu`、`/api/metrics/memory`、`/api/metrics/disk` 各自每 2s 被請求一次
 - [ ] 4.6 暫停 terminal A 後端（Ctrl+C），不重整瀏覽器：三張圖容器仍 mount，各自顯示 error notice；恢復 backend、重整後三張圖再開始累積資料
 - [ ] 4.7 在 terminal B 改用 `VITE_POLL_INTERVAL_MS=500 npm start`，瀏覽器重整、DevTools Network 量到 fetch 間隔 ≈ 500ms（驗證 env override）；驗完後恢復預設
-- [ ] 4.8 跑 `npm run build`，退出碼 0（Vite production build 仍能 compile）
+- [x] 4.8 跑 `npm run build`，退出碼 0（Vite production build 仍能 compile）
 
 ## 5. openspec hygiene
 
-- [ ] 5.1 跑 `openspec validate add-polling-multi-charts --strict`，退出碼 0
+- [x] 5.1 跑 `openspec validate add-polling-multi-charts --strict`，退出碼 0
 - [ ] 5.2 跑 `openspec status --change add-polling-multi-charts`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
 - [ ] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #6 通過、瀏覽器驗證 4.5–4.7 都跑過再 archive
+
+## 6. 🔁 Refinement during phase 6 verification（reviewer 反映後就地修）
+
+Phase 6 verification 跑 4.3–4.5 期間 reviewer 對畫面提出三個問題，這些修正不另開 openspec change，而是在本 in-flight change 內補完並回填 proposal / design / spec。
+
+### 6.1 三張圖 plot area 對齊 + disk bar 可見度
+- [x] 6.1.1 CpuChart / MemoryChart 加 `<YAxis ... width={100}>`；DiskChart 把 `width={120}` 降為 `width={100}`，並補 `tickFormatter={(fs) => fs.split('/').filter(Boolean).pop() ?? fs}` 顯示 basename（`/dev/disk3s1s1` → `disk3s1s1`、`/` → `/`）。
+- [x] 6.1.2 DiskChart `<Bar>` 加 `fill="#9affc6"`（接 `--color-ok`），暗背景上可讀。
+- [x] 6.1.3 既有測試（51 支）全綠 — spec 沒鎖 YAxis width / Bar fill，視覺微調不破契約。
+- [x] 6.1.4 commit `stage 6: align dashboard chart plot areas + brighten disk bars`
+
+### 6.2 Disk 顯示 `Last updated: HH:MM:SS`（解決 design.md Open Questions 的「show last updated time?」）
+- [x] 6.2.1 🔴 Red：`useMetricPolling.test.tsx` 加兩個 case（初始 `lastUpdatedAt === null` / 每 tick 後 `typeof ... === 'number'` 且 `second >= first`）；`Dashboard.test.tsx` 加一個 case 斷言 `getByText(/Last updated/i)` 在成功 fetch 後存在。
+- [x] 6.2.2 🟢 Green：`useMetricPolling.ts` 多 `useState<number | null>(null)` + 成功分支 `setLastUpdatedAt(Date.now())`；回傳 `{ data, status, lastUpdatedAt }`。`Dashboard.tsx` 在 `<DiskChart>` 後 render `<p className={styles.timestamp}>Last updated: {new Date(disk.lastUpdatedAt).toLocaleTimeString()}</p>`。
+- [x] 6.2.3 `src/App.module.css` 加 `.timestamp` 規則（mono、`--color-dim`、`tabular-nums`、`text-align: center`）。
+- [x] 6.2.4 跑 `npm test`，51 / 51 全綠（含 3 新 case）。
+- [x] 6.2.5 commit `stage 6: surface disk last-updated timestamp under DiskChart`
+
+### 6.3 三張圖鎖 `isAnimationActive={false}`
+- [x] 6.3.1 CpuChart / MemoryChart 的 `<Line>` 加 `isAnimationActive={false}`；DiskChart 的 `<Bar>` 同樣加。理由：Recharts 預設動畫期間 `<g.recharts-line-dots>` 整個從 DOM 移除，2s polling 加 ~1500ms 動畫長度導致 dot 只有 25% 時間在 DOM 上；CPU / Memory 兩 hook 啟動相差 ε 毫秒，相位錯開 → 對偶閃爍。
+- [x] 6.3.2 既有測試全綠 — spec 沒鎖 animation。
+- [x] 6.3.3 commit `stage 6: pin Recharts isAnimationActive=false on Line/Bar so dots stay in DOM`
+
+### 6.4 同步 openspec docs
+- [x] 6.4.1 `specs/frontend-app/spec.md`：`useMetricPolling` 回傳擴為 `{ data, status, lastUpdatedAt }` + 加兩個 scenario；Dashboard 加 disk last-updated 段落 + 一個 scenario。
+- [x] 6.4.2 `design.md`：Decision #1 / #4 / #5 / #10 code 範例更新；新增 Decision #11 解釋 `isAnimationActive=false`；Risks/Trade-offs 補 animation 與 tickFormatter 兩則；Open Questions 標記「show last updated time?」已解決。
+- [x] 6.4.3 `proposal.md`：What Changes 條目補 `lastUpdatedAt` / `.timestamp` 樣式；鎖定的決策 區段補 hook 回傳 / YAxis width / Bar fill / `isAnimationActive` / disk last-updated UI 五條。
+- [x] 6.4.4 跑 `openspec validate add-polling-multi-charts --strict`，退出碼 0。
+- [x] 6.4.5 commit `stage 6 (docs): sync proposal / design / spec with phase-6 refinements`

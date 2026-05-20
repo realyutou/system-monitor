@@ -10,9 +10,10 @@ The frontend SHALL expose a generic React hook `useMetricPolling<TDto, TRow>(fet
 - `historyLimit` is a positive integer; when omitted it MUST default to the value of `METRIC_HISTORY_LIMIT` exported by `src/config.ts`.
 - The hook SHALL invoke `fetcher` once immediately on mount and then once per `intervalMs` while the component remains mounted.
 - The hook SHALL maintain an internal history buffer of the most recent fetched DTOs, capped at `historyLimit`; on overflow the oldest entry MUST be discarded so the buffer length never exceeds `historyLimit`.
-- The hook SHALL return an object `{ data, status }` where `status` is one of the string literals `'loading'`, `'ok'`, or `'error'`, and `data` is either `null` (while the history is empty) or the result of calling `transform(history)`.
+- The hook SHALL return an object `{ data, status, lastUpdatedAt }` where `status` is one of the string literals `'loading'`, `'ok'`, or `'error'`, `data` is either `null` (while the history is empty) or the result of calling `transform(history)`, and `lastUpdatedAt` is either `null` (before the first successful fetch) or the epoch-millisecond timestamp (via `Date.now()`) of the most recent successful fetch.
 - On unmount, the hook MUST clear any pending interval and MUST NOT call `setState` after the component has been unmounted (no setState-after-unmount warnings).
 - The hook MUST NOT rebuild its interval when the caller passes a new `fetcher` or `transform` reference on every render; the only deps that cause interval rebuild are `intervalMs` and `historyLimit`.
+- A failed fetch MUST NOT advance `lastUpdatedAt`; only the success branch of the polling tick may update it.
 
 #### Scenario: useMetricPolling fetches once on mount
 - **WHEN** a component renders `useMetricPolling(fetcher, transform, 2000)` with `fetcher` returning `Promise.resolve({ x: 1 })`
@@ -39,6 +40,16 @@ The frontend SHALL expose a generic React hook `useMetricPolling<TDto, TRow>(fet
 - **WHEN** a component that uses `useMetricPolling` is unmounted after at least one successful tick
 - **AND** the test advances time by several more intervals
 - **THEN** the total number of `fetcher` invocations after unmount MUST equal the count observed at unmount time (no further fetches)
+
+#### Scenario: useMetricPolling exposes lastUpdatedAt that becomes a number after a successful fetch
+- **WHEN** a component renders `useMetricPolling(fetcher, transform, 2000)` with `fetcher` returning `Promise.resolve({ x: 1 })`
+- **THEN** the initial value of the returned `lastUpdatedAt` MUST be `null`
+- **AND** after `await vi.advanceTimersByTimeAsync(0)`, the returned `lastUpdatedAt` MUST be a finite `number`
+
+#### Scenario: useMetricPolling advances lastUpdatedAt on each successful poll
+- **WHEN** a component renders `useMetricPolling(fetcher, transform, 100)` with `fetcher` resolving, and the test reads `lastUpdatedAt` after the initial tick is flushed
+- **AND** the test advances time via `await vi.advanceTimersByTimeAsync(100)` and reads `lastUpdatedAt` again
+- **THEN** the second value MUST be a `number` greater than or equal to the first
 
 #### Scenario: useMetricPolling does not rebuild interval on unrelated re-renders
 - **WHEN** a parent component re-renders the child that uses `useMetricPolling`, passing a new inline `fetcher` reference each render
@@ -238,6 +249,8 @@ The frontend SHALL expose a `<DiskChart />` component from `src/components/DiskC
 
 The frontend SHALL expose a `<Dashboard />` component from `src/components/Dashboard.tsx` that, on each render, calls `useCpu()`, `useMemory()`, and `useDisk()` internally and renders `<CpuChart>`, `<MemoryChart>`, and `<DiskChart>` (in that order) supplied with the corresponding hooks' `data ?? []`. The component SHALL expose the identifier `data-testid="dashboard"` on its wrapper element. When any hook's `status` equals `'error'`, the Dashboard MUST render a visible notice text identifying the failing metric (e.g., containing the substring `CPU`, `Memory`, or `Disk` together with a failure indicator). The Dashboard MUST NOT crash if any individual hook is in `'loading'` or `'error'` status; the corresponding chart MUST still mount (with empty data series for line charts and bar charts).
 
+When the disk hook's `lastUpdatedAt` is non-null, the Dashboard SHALL render a visible text node near the `<DiskChart>` whose accessible text begins with the substring `Last updated` (e.g., `Last updated: 09:21:37`). This text gives a polling-liveness signal for the disk snapshot, which otherwise rarely changes shape between ticks. The text MUST update at least once per successful disk poll. CPU and Memory charts are NOT required to render an analogous text because their line plots already signal polling visually by appending a new dot per tick.
+
 #### Scenario: Dashboard mounts all three chart testids on successful initial fetch
 - **WHEN** a test mounts `<Dashboard />` with `global.fetch` stubbed so that `/api/metrics/cpu`, `/api/metrics/memory`, and `/api/metrics/disk` all resolve successfully (with shape-conforming payloads) and waits for effects to settle
 - **THEN** the rendered DOM MUST contain elements identified by `data-testid="dashboard"`, `data-testid="cpu-chart"`, `data-testid="memory-chart"`, and `data-testid="disk-chart"`
@@ -246,6 +259,10 @@ The frontend SHALL expose a `<Dashboard />` component from `src/components/Dashb
 - **WHEN** a test mounts `<Dashboard />` with `global.fetch` stubbed so that `/api/metrics/cpu` resolves successfully but `/api/metrics/memory` rejects
 - **THEN** the rendered DOM MUST contain a visible text node whose accessible text contains the substring `Memory` and indicates failure (e.g., the substring `unavailable`)
 - **AND** the rendered DOM MUST still contain elements identified by `data-testid="cpu-chart"`, `data-testid="memory-chart"`, and `data-testid="disk-chart"`
+
+#### Scenario: Dashboard renders a last-updated timestamp near the disk chart
+- **WHEN** a test mounts `<Dashboard />` with `global.fetch` stubbed so that `/api/metrics/cpu`, `/api/metrics/memory`, and `/api/metrics/disk` all resolve successfully (with shape-conforming payloads)
+- **THEN** after `useDisk()`'s first successful tick has flushed, the rendered DOM MUST contain a visible text node whose accessible text contains the substring `Last updated`
 
 #### Scenario: Dashboard delegates to the three wrapper hooks
 - **WHEN** a reviewer reads `src/components/Dashboard.tsx`

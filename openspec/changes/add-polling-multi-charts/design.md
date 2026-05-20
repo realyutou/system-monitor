@@ -59,7 +59,7 @@
 
 ## Decisions
 
-### 1. `useMetricPolling` 介面：`(fetcher, transform, intervalMs?, historyLimit?)`，回 `{ data, status }`
+### 1. `useMetricPolling` 介面：`(fetcher, transform, intervalMs?, historyLimit?)`，回 `{ data, status, lastUpdatedAt }`
 
 **選擇**：
 
@@ -72,7 +72,11 @@ export function useMetricPolling<TDto, TRow>(
   transform: (dtos: TDto[]) => TRow[],
   intervalMs: number = POLL_INTERVAL_MS,
   historyLimit: number = METRIC_HISTORY_LIMIT,
-): { data: TRow[] | null; status: PollingStatus } {
+): {
+  data: TRow[] | null;
+  status: PollingStatus;
+  lastUpdatedAt: number | null;
+} {
   const fetcherRef = useRef(fetcher);
   const transformRef = useRef(transform);
   fetcherRef.current = fetcher;
@@ -80,6 +84,7 @@ export function useMetricPolling<TDto, TRow>(
 
   const [history, setHistory] = useState<TDto[]>([]);
   const [status, setStatus] = useState<PollingStatus>('loading');
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -92,6 +97,7 @@ export function useMetricPolling<TDto, TRow>(
           return next.length > historyLimit ? next.slice(-historyLimit) : next;
         });
         setStatus('ok');
+        setLastUpdatedAt(Date.now());
       } catch {
         if (!cancelled) setStatus('error');
       }
@@ -105,7 +111,7 @@ export function useMetricPolling<TDto, TRow>(
   }, [intervalMs, historyLimit]);
 
   const data = history.length === 0 ? null : transformRef.current(history);
-  return { data, status };
+  return { data, status, lastUpdatedAt };
 }
 ```
 
@@ -116,6 +122,7 @@ export function useMetricPolling<TDto, TRow>(
 - **`data: null` when history empty**：與 stage 5 `useCpu` 的 null contract 一致；component 層 `data ?? []` fallback 給 chart。
 - **Ring buffer 用 `slice(-N)`**：每 tick `O(N)` 拷貝，N = 30 量級無效能問題；保留時間順序、不需特殊 ring 結構。
 - **Cancelled flag + clearInterval**：unmount 後 fetch resolve 不會 setState；interval 不再觸發。
+- **`lastUpdatedAt: number | null`**：每次 polling tick 成功後寫入 `Date.now()`；失敗分支不動，避免 error 被當作 fresh。Dashboard 用這個欄位在 DiskChart 下方畫「Last updated: HH:MM:SS」，因為 disk snapshot 沒時序、bar 長度跨 tick 幾乎不變，沒有這個視覺訊號 reviewer 會懷疑 polling 是否在跑。CPU / Memory 的 LineChart 每 tick 多一個 dot，已自帶 liveness 訊號，所以不顯示文字。
 
 **替代方案考慮**：
 
@@ -192,13 +199,22 @@ export function DiskChart({ data, width = 600, height = 300 }: DiskChartProps) {
     <div data-testid="disk-chart" role="img" aria-label="Disk usage chart">
       <BarChart layout="vertical" width={width} height={height} data={data}>
         <XAxis type="number" domain={[0, 100]} />
-        <YAxis type="category" dataKey="fs" width={120} />
-        <Bar dataKey="usage" />
+        <YAxis
+          type="category"
+          dataKey="fs"
+          width={100}
+          tickFormatter={(fs: string) =>
+            fs.split('/').filter(Boolean).pop() ?? fs
+          }
+        />
+        <Bar dataKey="usage" fill="#9affc6" isAnimationActive={false} />
       </BarChart>
     </div>
   );
 }
 ```
+
+YAxis `width={100}` 與 CpuChart / MemoryChart 共用同一個值，確保三張圖的 plot area 起點對齊；`tickFormatter` 取 fs 路徑的 basename（`/dev/disk3s1s1` → `disk3s1s1`、`/` → `/`）才能在 100px 內裝得下標籤而不被裁。`fill="#9affc6"` 接 `--color-ok` 主題色，bar 在暗背景上看得到，而非 Recharts 預設的深紫。`isAnimationActive={false}` 跟兩條 LineChart 的設定一致，理由見 §11。
 
 ```ts
 // src/lib/toDiskSnapshot.ts
@@ -241,6 +257,11 @@ export function Dashboard() {
       <MemoryChart data={memory.data ?? []} />
       {memory.status === 'error' && <p className={styles.notice}>Memory metric unavailable</p>}
       <DiskChart data={disk.data ?? []} />
+      {disk.lastUpdatedAt !== null && (
+        <p className={styles.timestamp}>
+          {`Last updated: ${new Date(disk.lastUpdatedAt).toLocaleTimeString()}`}
+        </p>
+      )}
       {disk.status === 'error' && <p className={styles.notice}>Disk metric unavailable</p>}
     </section>
   );
@@ -264,6 +285,7 @@ export default function App() {
 - `<App>` 只剩 layout（header + main 區），責任清晰。
 - Phase #7 RWD：CSS media queries / grid 都在 Dashboard 內處理，App 不動。
 - Phase #8 fixture：若需要注入測試資料，可在 Dashboard 之上加 `<Dashboard cpuFixture={...} />` props 或抽 presentational variant；本 change 不預先加 prop（YAGNI）。
+- Disk last-updated 文字：phase 6 verification 時 reviewer 反映 disk snapshot bar 跨 tick 幾乎不動，懷疑 polling 是否真的在跑。原 design 把這個 UI 留到 phase #7 / #8，但因為它對 phase #6 的「即時更新」reviewer 驗收項目影響太直接，決定在 phase 6 內就補。實作只多兩件：useMetricPolling 多回 `lastUpdatedAt`、Dashboard 在 DiskChart 後面 render 一行文字。CPU / Memory 不需要這個訊號 — 它們的 LineChart 每 tick 多一個 dot，liveness 已內建。
 
 **替代方案考慮**：
 
@@ -407,13 +429,20 @@ export function MemoryChart({ data, width = 600, height = 300 }: MemoryChartProp
     <div data-testid="memory-chart" role="img" aria-label="Memory usage chart">
       <LineChart width={width} height={height} data={data}>
         <XAxis dataKey="time" type="number" domain={['dataMin', 'dataMax']} />
-        <YAxis domain={[0, 100]} />
-        <Line type="monotone" dataKey="usage" dot={{ r: 4 }} />
+        <YAxis domain={[0, 100]} width={100} />
+        <Line
+          type="monotone"
+          dataKey="usage"
+          dot={{ r: 4 }}
+          isAnimationActive={false}
+        />
       </LineChart>
     </div>
   );
 }
 ```
+
+CpuChart 鏡像同樣配置 — `YAxis width={100}` 與 DiskChart 對齊，`Line isAnimationActive={false}` 理由見 §11。
 
 **為何**：
 
@@ -425,6 +454,23 @@ export function MemoryChart({ data, width = 600, height = 300 }: MemoryChartProp
 
 - 抽 `<MetricLineChart>` 共用元件（CPU / Memory 都用）：捨棄。本 change 元件數量已多，過早抽象；兩張圖獨立檔案更易閱讀。
 - Memory 改用 AreaChart：捨棄。視覺與 CPU 不一致。
+
+### 11. Recharts `isAnimationActive={false}`：三張圖的 Line / Bar 都關閉動畫
+
+**選擇**：CpuChart 與 MemoryChart 的 `<Line>`、DiskChart 的 `<Bar>` 都設 `isAnimationActive={false}`。
+
+**為何**：
+
+- Recharts `<Line>` 預設動畫期間（~1500ms）會把整個 `<g.recharts-line-dots>` 從 DOM 拔掉，動畫結束才補回；在 2000ms 的 polling 週期下 dot 只在約 25% 的時間內存在。
+- CPU 與 Memory 兩個 hook 的 `useEffect` 掛載時間相差 ε 毫秒，interval 永久錯開 → 同一瞬間一張圖在「animating（無 dot）」另一張在「settled（有 dot）」，從 reviewer 視角就是「CPU dots 2s 消失一次，Memory dots 2s 出現一次」的對偶閃爍 — phase 6 verification 時被反映。
+- 關掉動畫後 dot 永遠 30 顆掛在 DOM 上，新 tick 直接「跳」到新位置；對 2s polling 的視覺速度而言，tween 不必要。
+- BarChart 同樣每 tick 重播 grow 動畫，雖然 disk 數值幾乎不變、視覺差異小，為了一致性也關閉。
+
+**替代方案考慮**：
+
+- 縮短 `animationDuration` 到 < polling interval 的 1/4（如 300ms）：dot 大多時間還是看得到，但 reviewer 仍可能在 polling 邊界看到閃；不如直接關閉乾淨。
+- 只關 Memory，留 CPU 動畫：兩張圖視覺不一致，後續維護混亂。
+- 留 BarChart 的動畫：disk 數值不變時，grow 仍會每 2s 重播一次，視覺干擾 reviewer 的閱讀。
 
 ## Risks / Trade-offs
 
@@ -439,6 +485,8 @@ export function MemoryChart({ data, width = 600, height = 300 }: MemoryChartProp
 - **[Trade-off]** Disk 不畫時序 → 與其他兩張圖視覺風格不一致。可接受，因為 disk 即 snapshot 語意，BarChart 更直觀；reviewer 不會誤以為 disk 沒在更新（每 tick BarChart 仍會重渲）。
 - **[Trade-off]** Wrappers 三個檔案 + generic hook 一個檔案 → 看起來「多了一層」。可接受，三個 wrapper 各只 2–3 行，可讀性高；DRY 收益遠大於增加的檔案數。
 - **[Trade-off]** Memory client-side timestamp → 與後端時鐘不嚴格對齊。可接受，demo 規模差異不可見。
+- **[Trade-off]** `isAnimationActive={false}` → 新資料點 / bar 新值不會 tween 過去，而是直接「跳」到新位置。可接受，2 秒 polling 的視覺速度本來就不需要 tween；換來的是 dot 永遠在 DOM 上、可預測。
+- **[Trade-off]** Disk `tickFormatter` 取 basename → 同名 mount 路徑會碰撞（例：`/foo/data` 與 `/bar/data` 都顯示成 `data`）。可接受，本機 demo 規模 + macOS 的 mount 命名（disk3s1s1 / disk5s1 / disk7s1）天然不會碰撞；若 phase #7 / #8 推到雲端伺服器才會遇到，到時可改顯示 full path + tooltip。
 
 ## Migration Plan
 
@@ -456,6 +504,6 @@ export function MemoryChart({ data, width = 600, height = 300 }: MemoryChartProp
 
 - **Disk BarChart 是否該顯示 `usedBytes / totalBytes` tooltip？** 本 change 不加（YAGNI）；phase #7 RWD 完成後若 reviewer 反映「只有 percent 看不出絕對容量」再開新 change 加 tooltip。
 - **Polling 暫停機制（visibility API）？** 標籤頁不可見時可暫停 polling 省 CPU；本 change 不做（本機 demo 通常不切標籤）。如果上 production 或長時間 demo 再評估。
-- **是否要顯示「最近一次更新時間」UI？** 本 change 不加；reviewer 透過 DevTools Network 即可確認 polling。phase #7 / #8 再評估視覺呈現。
+- ~~**是否要顯示「最近一次更新時間」UI？**~~ **已在 phase 6 verification 解決**：reviewer 反映 disk snapshot 看起來像靜止，所以 useMetricPolling 多回 `lastUpdatedAt` 欄位、Dashboard 在 DiskChart 下方 render 一行 `Last updated: HH:MM:SS`（dim gray，與 readout 同色階）。CPU / Memory 不加，因為它們的 LineChart 每 tick 多一個 dot，已有 liveness 訊號。
 - **Memory client-side timestamp 是否該抽到 `useMetricPolling` 內部？** 本 change 留在 wrapper 內；如果未來 memory / disk 都需要 client stamp，再考慮把它變成 hook 選項（`{ stamp: true }`）。
 - **Dashboard 是否該為三張圖加 title / heading？** 本 change 不加（依賴 chart 內 aria-label）；phase #7 / #8 視覺迭代時再評估。
