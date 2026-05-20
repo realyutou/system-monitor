@@ -54,6 +54,22 @@ describe('<Dashboard />', () => {
     expect(screen.getByTestId('disk-chart')).toBeInTheDocument();
   });
 
+  it('renders a last-updated timestamp near the disk chart after a successful fetch', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn((url: string) => {
+        if (url === '/api/metrics/cpu') return okCpu();
+        if (url === '/api/metrics/memory') return okMemory();
+        if (url === '/api/metrics/disk') return okDisk();
+        return Promise.reject(new Error(`unexpected url: ${url}`));
+      }),
+    );
+    render(<Dashboard />);
+    await waitFor(() =>
+      expect(screen.getByText(/Last updated/i)).toBeInTheDocument(),
+    );
+  });
+
   it('renders an error notice when a metric fetch fails', async () => {
     vi.stubGlobal(
       'fetch',

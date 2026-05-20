@@ -8,7 +8,11 @@ export function useMetricPolling<TDto, TRow>(
   transform: (dtos: TDto[]) => TRow[],
   intervalMs: number = POLL_INTERVAL_MS,
   historyLimit: number = METRIC_HISTORY_LIMIT,
-): { data: TRow[] | null; status: PollingStatus } {
+): {
+  data: TRow[] | null;
+  status: PollingStatus;
+  lastUpdatedAt: number | null;
+} {
   const fetcherRef = useRef(fetcher);
   const transformRef = useRef(transform);
   fetcherRef.current = fetcher;
@@ -16,6 +20,7 @@ export function useMetricPolling<TDto, TRow>(
 
   const [history, setHistory] = useState<TDto[]>([]);
   const [status, setStatus] = useState<PollingStatus>('loading');
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -28,6 +33,7 @@ export function useMetricPolling<TDto, TRow>(
           return next.length > historyLimit ? next.slice(-historyLimit) : next;
         });
         setStatus('ok');
+        setLastUpdatedAt(Date.now());
       } catch {
         if (!cancelled) setStatus('error');
       }
@@ -41,5 +47,5 @@ export function useMetricPolling<TDto, TRow>(
   }, [intervalMs, historyLimit]);
 
   const data = history.length === 0 ? null : transformRef.current(history);
-  return { data, status };
+  return { data, status, lastUpdatedAt };
 }

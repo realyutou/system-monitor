@@ -22,6 +22,11 @@ export function Dashboard() {
         <p className={styles.notice}>Memory metric unavailable</p>
       )}
       <DiskChart data={disk.data ?? []} />
+      {disk.lastUpdatedAt !== null && (
+        <p className={styles.timestamp}>
+          {`Last updated: ${new Date(disk.lastUpdatedAt).toLocaleTimeString()}`}
+        </p>
+      )}
       {disk.status === 'error' && (
         <p className={styles.notice}>Disk metric unavailable</p>
       )}

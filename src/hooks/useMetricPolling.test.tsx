@@ -95,6 +95,36 @@ describe('useMetricPolling', () => {
     expect(fetcher.mock.calls.length).toBe(before);
   });
 
+  it('exposes lastUpdatedAt as null while loading and as a number after a successful fetch', async () => {
+    const fetcher = vi.fn().mockResolvedValue({ x: 1 });
+    const { result } = renderHook(() =>
+      useMetricPolling(fetcher, identity, 2000),
+    );
+    expect(result.current.lastUpdatedAt).toBeNull();
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    expect(typeof result.current.lastUpdatedAt).toBe('number');
+  });
+
+  it('advances lastUpdatedAt on each successful poll', async () => {
+    const fetcher = vi.fn().mockResolvedValue({ x: 1 });
+    const { result } = renderHook(() =>
+      useMetricPolling(fetcher, identity, 100),
+    );
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    const first = result.current.lastUpdatedAt;
+    expect(typeof first).toBe('number');
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+    const second = result.current.lastUpdatedAt;
+    expect(typeof second).toBe('number');
+    expect(second).toBeGreaterThanOrEqual(first as number);
+  });
+
   it('does not rebuild interval when caller passes a new inline fetcher reference', async () => {
     const baseFetcher = vi.fn().mockResolvedValue({ x: 1 });
     const { rerender } = renderHook(() =>
