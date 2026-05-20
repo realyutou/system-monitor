@@ -199,7 +199,7 @@
 
 - [x] 5.1 跑 `openspec validate add-polling-multi-charts --strict`，退出碼 0
 - [x] 5.2 跑 `openspec status --change add-polling-multi-charts`，proposal / design / specs / tasks 全部 `done`、tasks 全部 `[x]`
-- [ ] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #6 通過、瀏覽器驗證 4.5–4.7 都跑過再 archive
+- [x] 5.3 暫不執行 `/opsx:archive`；等 reviewer 確認 phase #6 通過、瀏覽器驗證 4.5–4.7 都跑過再 archive
 
 ## 6. 🔁 Refinement during phase 6 verification（reviewer 反映後就地修）
 
