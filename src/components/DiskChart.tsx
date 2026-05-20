@@ -24,7 +24,7 @@ export function DiskChart({
             fs.split('/').filter(Boolean).pop() ?? fs
           }
         />
-        <Bar dataKey="usage" fill="#9affc6" />
+        <Bar dataKey="usage" fill="#9affc6" isAnimationActive={false} />
       </BarChart>
     </div>
   );

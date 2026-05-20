@@ -17,7 +17,12 @@ export function MemoryChart({
       <LineChart width={width} height={height} data={data}>
         <XAxis dataKey="time" type="number" domain={['dataMin', 'dataMax']} />
         <YAxis domain={[0, 100]} width={100} />
-        <Line type="monotone" dataKey="usage" dot={{ r: 4 }} />
+        <Line
+          type="monotone"
+          dataKey="usage"
+          dot={{ r: 4 }}
+          isAnimationActive={false}
+        />
       </LineChart>
     </div>
   );
