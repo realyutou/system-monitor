@@ -18,4 +18,11 @@ describe('<DiskChart />', () => {
     render(<DiskChart data={[]} width={400} height={200} />);
     expect(screen.getByTestId('disk-chart')).toBeInTheDocument();
   });
+
+  it('renders a visible Disk title heading', () => {
+    render(<DiskChart data={disk.idle} width={400} height={200} />);
+    expect(
+      screen.getByRole('heading', { name: /Disk/i }),
+    ).toBeInTheDocument();
+  });
 });

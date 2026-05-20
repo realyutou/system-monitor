@@ -245,6 +245,28 @@ The frontend SHALL expose a `<DiskChart />` component from `src/components/DiskC
 - **WHEN** a reviewer reads `src/components/DiskChart.tsx`
 - **THEN** the file MUST NOT import the identifier `ResponsiveContainer` from `recharts`
 
+### Requirement: Dashboard chart components each render a visible title heading
+
+Each of `<CpuChart />`, `<MemoryChart />`, and `<DiskChart />` SHALL render a visible heading element (an HTML element with implicit ARIA role `heading`, e.g., `<h2>` or `<h3>`) whose accessible name identifies what the chart monitors. The headings' accessible names MUST contain the substrings `CPU`, `Memory`, and `Disk` respectively (case-insensitive). The heading SHALL appear in the same DOM subtree as the chart (so it is reachable from the same render output) and SHOULD be positioned visually above the chart's plot area, so that a sighted reader can identify which metric the chart is monitoring without parsing axis labels.
+
+The heading text is fixed inside each chart component (not configurable via prop). The Dashboard does NOT add a duplicate heading on top of the chart's own heading.
+
+#### Scenario: CpuChart renders a visible CPU title heading
+- **WHEN** a test renders `<CpuChart data={fixture} width={400} height={200} />`
+- **THEN** the rendered DOM MUST contain an element with role `heading` whose accessible name contains the substring `CPU` (case-insensitive)
+
+#### Scenario: MemoryChart renders a visible Memory title heading
+- **WHEN** a test renders `<MemoryChart data={fixture} width={400} height={200} />`
+- **THEN** the rendered DOM MUST contain an element with role `heading` whose accessible name contains the substring `Memory` (case-insensitive)
+
+#### Scenario: DiskChart renders a visible Disk title heading
+- **WHEN** a test renders `<DiskChart data={fixture} width={400} height={200} />`
+- **THEN** the rendered DOM MUST contain an element with role `heading` whose accessible name contains the substring `Disk` (case-insensitive)
+
+#### Scenario: Dashboard surfaces all three chart titles
+- **WHEN** a test mounts `<Dashboard />` with `global.fetch` stubbed so that `/api/metrics/cpu`, `/api/metrics/memory`, and `/api/metrics/disk` all resolve successfully
+- **THEN** the rendered DOM MUST contain three elements with role `heading` whose accessible names contain `CPU`, `Memory`, and `Disk` respectively
+
 ### Requirement: Dashboard container renders all three charts and surfaces per-metric error notices
 
 The frontend SHALL expose a `<Dashboard />` component from `src/components/Dashboard.tsx` that, on each render, calls `useCpu()`, `useMemory()`, and `useDisk()` internally and renders `<CpuChart>`, `<MemoryChart>`, and `<DiskChart>` (in that order) supplied with the corresponding hooks' `data ?? []`. The component SHALL expose the identifier `data-testid="dashboard"` on its wrapper element. When any hook's `status` equals `'error'`, the Dashboard MUST render a visible notice text identifying the failing metric (e.g., containing the substring `CPU`, `Memory`, or `Disk` together with a failure indicator). The Dashboard MUST NOT crash if any individual hook is in `'loading'` or `'error'` status; the corresponding chart MUST still mount (with empty data series for line charts and bar charts).

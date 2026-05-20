@@ -19,4 +19,11 @@ describe('<MemoryChart />', () => {
     render(<MemoryChart data={[]} width={400} height={200} />);
     expect(screen.getByTestId('memory-chart')).toBeInTheDocument();
   });
+
+  it('renders a visible Memory title heading', () => {
+    render(<MemoryChart data={memory.idle} width={400} height={200} />);
+    expect(
+      screen.getByRole('heading', { name: /Memory/i }),
+    ).toBeInTheDocument();
+  });
 });

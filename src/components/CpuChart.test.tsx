@@ -19,4 +19,11 @@ describe('<CpuChart />', () => {
     render(<CpuChart data={[]} width={400} height={200} />);
     expect(screen.getByTestId('cpu-chart')).toBeInTheDocument();
   });
+
+  it('renders a visible CPU title heading', () => {
+    render(<CpuChart data={cpu.idle} width={400} height={200} />);
+    expect(
+      screen.getByRole('heading', { name: /CPU/i }),
+    ).toBeInTheDocument();
+  });
 });

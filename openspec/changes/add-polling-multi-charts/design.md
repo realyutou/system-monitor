@@ -472,6 +472,35 @@ CpuChart 鏡像同樣配置 — `YAxis width={100}` 與 DiskChart 對齊，`Line
 - 只關 Memory，留 CPU 動畫：兩張圖視覺不一致，後續維護混亂。
 - 留 BarChart 的動畫：disk 數值不變時，grow 仍會每 2s 重播一次，視覺干擾 reviewer 的閱讀。
 
+### 12. 每張 chart 內建一個固定 title heading
+
+**選擇**：`<CpuChart>` / `<MemoryChart>` / `<DiskChart>` 各自在元件內 render 一個 `<h3>`（標題文字寫死為 `CPU Usage` / `Memory Usage` / `Disk Usage`），放在 chart `<div data-testid>` 同層 sibling、用一個 `.chartCard` flex column 包起來。
+
+```tsx
+// e.g. src/components/CpuChart.tsx
+return (
+  <div className={styles.chartCard}>
+    <h3 className={styles.chartTitle}>CPU Usage</h3>
+    <div data-testid="cpu-chart" role="img" aria-label="CPU usage chart">
+      <LineChart ...>...</LineChart>
+    </div>
+  </div>
+);
+```
+
+**為何**：
+
+- Reviewer 開瀏覽器時三張圖視覺幾乎一樣（line/bar 都是綠色），靠 X / Y 軸標籤或 testid 才能辨識，違反 BACKGROUND.md 「一眼能看出」的要求。標題是最小、最直觀的補丁。
+- 寫死標題文字（不開 prop）：DRY + 與 aria-label 對齊；i18n 需求出現再開新 change。
+- `.chartCard` 包起來而非直接 fragment：Dashboard 的 flex `gap` 是 chart 之間用的，title 與 chart 之間要更緊（`.chartCard` 內部用較小的 `gap: var(--space-2)`）。
+- `<h3>` 而非 `<h2>`：頁面已有隱含的 `<h1>` 給 readout 區（雖然目前沒明文 h1），保留 h2 給未來區段標題。h3 對應「dashboard 內的單一 chart」層級。
+
+**替代方案考慮**：
+
+- 標題放在 chart `<div data-testid>` 內部：捨棄。`role="img"` 對 screen reader 來說會吞掉內部 heading 的可讀性（aria-label 取代內容），把 heading 拉出來才能讓 AT 把它當獨立 landmark。
+- 標題寫進 chart 元件外（Dashboard 自己 render）：捨棄。違反元件自我描述原則；CpuChart 在 phase 8 fixture 變體單獨用時也需要標題。
+- 用 prop `title` 開放配置：YAGNI；目前三張圖只有一種文字。
+
 ## Risks / Trade-offs
 
 - **[Risk]** `vi.useFakeTimers()` 與 fetch promise 的 microtask flushing 互動 → **Mitigation**：用 `vi.advanceTimersByTimeAsync(ms)`（非 sync 版）；初始 tick 後 `await vi.advanceTimersByTimeAsync(0)` flush；斷言用 `>= N` 而非 `=== N` 避免時序敏感。
