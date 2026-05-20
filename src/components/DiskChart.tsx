@@ -18,7 +18,11 @@ export function DiskChart({
       <h3 className={styles.chartTitle}>Disk Usage</h3>
       <div data-testid="disk-chart" role="img" aria-label="Disk usage chart">
         <BarChart layout="vertical" width={width} height={height} data={data}>
-          <XAxis type="number" domain={[0, 100]} />
+          <XAxis
+            type="number"
+            domain={[0, 100]}
+            tickFormatter={(v: number) => `${v} %`}
+          />
           <YAxis
             type="category"
             dataKey="fs"

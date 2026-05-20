@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 import type { CpuChartRow } from '../lib/toCpuSeries';
 import { formatChartTime } from '../lib/formatChartTime';
+import { computeTimeTicks } from '../lib/computeTimeTicks';
 import styles from '../App.module.css';
 
 type CpuChartProps = {
@@ -23,9 +24,14 @@ export function CpuChart({
             dataKey="time"
             type="number"
             domain={['dataMin', 'dataMax']}
+            ticks={computeTimeTicks(data.map((d) => d.time))}
             tickFormatter={formatChartTime}
           />
-          <YAxis domain={[0, 100]} width={100} />
+          <YAxis
+            domain={[0, 100]}
+            width={100}
+            tickFormatter={(v: number) => `${v} %`}
+          />
           <Line
             type="monotone"
             dataKey="usage"
