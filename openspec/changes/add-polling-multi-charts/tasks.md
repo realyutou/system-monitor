@@ -171,15 +171,15 @@
 - [x] 2.14 跑 `npm test -- config`、`npm test -- toMemorySeries`、`npm test -- toDiskSnapshot`、`npm test -- memory-chart`、`npm test -- disk-chart`，每組分別綠
 - [x] 2.15 跑 `npm test -- useMetricPolling`、`npm test -- dashboard`、`npm test -- app`，全綠
 - [x] 2.16 跑 `npm test`，前後端所有測試全綠（後端 4 支 + toCpuSeries 3 支 + cpu-chart 2 支 + config / toMemorySeries / toDiskSnapshot / memory-chart / disk-chart / useMetricPolling / dashboard / app 新增與修改的案例）
-- [ ] 2.17 commit，訊息標註 `stage 6 (green): useMetricPolling + memory/disk charts + Dashboard wired into App`
+- [x] 2.17 commit，訊息標註 `stage 6 (green): useMetricPolling + memory/disk charts + Dashboard wired into App`
 
 ## 3. ♻️ Refactor：確認 src/config.ts 是 polling 常數唯一來源、清理多餘 inline 常數
 
-- [ ] 3.1 全文搜尋 `2000`、`30`（with surrounding context）確認沒有在 hook / Dashboard / App 留下 hard-coded polling 常數；所有引用都應該透過 `POLL_INTERVAL_MS` / `METRIC_HISTORY_LIMIT`
-- [ ] 3.2 確認 `useCpu` / `useMemory` / `useDisk` 三個 wrapper 都是 1–3 行的薄封裝，沒有重複 ring buffer 邏輯
-- [ ] 3.3 確認 `Dashboard.tsx` 沒有把三個 hook 的 `data` / `status` 重新命名為過多別名；最小命名（`cpu`、`memory`、`disk`）以利閱讀
-- [ ] 3.4 跑 `npm test`，全綠（無 regression）
-- [ ] 3.5 commit，訊息標註 `stage 6 (refactor): pin polling constants to src/config.ts; tidy wrapper shape`
+- [x] 3.1 全文搜尋 `2000`、`30`（with surrounding context）確認沒有在 hook / Dashboard / App 留下 hard-coded polling 常數；所有引用都應該透過 `POLL_INTERVAL_MS` / `METRIC_HISTORY_LIMIT`
+- [x] 3.2 確認 `useCpu` / `useMemory` / `useDisk` 三個 wrapper 都是 1–3 行的薄封裝，沒有重複 ring buffer 邏輯
+- [x] 3.3 確認 `Dashboard.tsx` 沒有把三個 hook 的 `data` / `status` 重新命名為過多別名；最小命名（`cpu`、`memory`、`disk`）以利閱讀
+- [x] 3.4 跑 `npm test`，全綠（無 regression）
+- [x] 3.5 commit，訊息標註 `stage 6 (refactor): pin polling constants to src/config.ts; tidy wrapper shape`
 
 ## 4. 驗證（對照 `docs/roadmap.md` 階段 #6 驗證指令）
 
