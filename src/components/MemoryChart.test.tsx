@@ -3,7 +3,17 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryChart } from './MemoryChart';
 import { memory } from './MemoryChart.fixtures';
 
-afterEach(() => cleanup());
+const originalTimeZone = process.env.TZ;
+
+afterEach(() => {
+  cleanup();
+  if (originalTimeZone === undefined) {
+    delete process.env.TZ;
+    return;
+  }
+
+  process.env.TZ = originalTimeZone;
+});
 
 describe('<MemoryChart />', () => {
   it('renders an SVG path for non-empty data', () => {
@@ -25,5 +35,17 @@ describe('<MemoryChart />', () => {
     expect(
       screen.getByRole('heading', { name: /Memory/i }),
     ).toBeInTheDocument();
+  });
+
+  it('formats timestamp axis ticks as compact times', () => {
+    process.env.TZ = 'Asia/Taipei';
+
+    const { container } = render(
+      <MemoryChart data={memory.idle} width={400} height={200} />,
+    );
+
+    expect(container.textContent).toContain('18:00:00');
+    expect(container.textContent).not.toContain('10:00:00');
+    expect(container.textContent).not.toContain(String(memory.idle[0].time));
   });
 });

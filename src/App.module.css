@@ -23,7 +23,8 @@
 }
 
 * { box-sizing: border-box; }
-html, body, #root { height: 100%; margin: 0; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { overflow-x: hidden; }
 
 .page {
   min-height: 100dvh;
@@ -34,7 +35,8 @@ html, body, #root { height: 100%; margin: 0; }
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .header {
@@ -50,7 +52,9 @@ html, body, #root { height: 100%; margin: 0; }
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-4) var(--space-5) var(--space-6);
-  min-width: 640px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 .dashboard {
@@ -59,6 +63,8 @@ html, body, #root { height: 100%; margin: 0; }
   align-items: center;
   gap: var(--space-4);
   width: 100%;
+  max-width: 720px;
+  min-width: 0;
 }
 
 .chartCard {
@@ -66,6 +72,29 @@ html, body, #root { height: 100%; margin: 0; }
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
+  width: min(100%, 600px);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.chartCard [role='img'] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chartCard [role='img'] > div {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto !important;
+}
+
+.chartCard svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto !important;
 }
 
 .chartTitle {
@@ -111,6 +140,8 @@ html, body, #root { height: 100%; margin: 0; }
   border: 1px solid var(--color-rule);
   border-radius: 2px;
   position: relative;
+  max-width: 100%;
+  min-width: 0;
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--color-text) 2%, transparent),
     0 8px 16px -8px rgba(0, 0, 0, 0.5);
@@ -167,6 +198,7 @@ html, body, #root { height: 100%; margin: 0; }
   margin: 0;
   color: var(--color-dim);
   font-variant-numeric: tabular-nums;
+  min-width: 0;
 }
 
 .notice {
@@ -186,6 +218,43 @@ html, body, #root { height: 100%; margin: 0; }
   letter-spacing: 0.04em;
   text-align: center;
   font-variant-numeric: tabular-nums;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: var(--space-4);
+  }
+
+  .main {
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4) var(--space-5);
+  }
+
+  .dashboard {
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    justify-content: center;
+    padding: var(--space-3);
+  }
+
+  .main {
+    align-items: stretch;
+    padding: var(--space-3) var(--space-3) var(--space-5);
+  }
+
+  .dashboard {
+    align-items: stretch;
+  }
+
+  .chartTitle {
+    font-size: 11px;
+  }
 }
 
 @keyframes rise {
