@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
+import { POLL_INTERVAL_MS } from './config';
 
 const okHealth = () =>
   Promise.resolve({
@@ -20,23 +21,39 @@ const okCpu = () =>
     }),
   });
 
-beforeEach(() => {
-  vi.stubGlobal(
-    'fetch',
-    vi.fn((url: string) => {
-      if (url === '/healthz') return okHealth();
-      if (url === '/api/metrics/cpu') return okCpu();
-      return Promise.reject(new Error(`unexpected url: ${url}`));
+const okMemory = () =>
+  Promise.resolve({
+    ok: true,
+    status: 200,
+    json: async () => ({ usedBytes: 1, totalBytes: 2, usagePercent: 50 }),
+  });
+
+const okDisk = () =>
+  Promise.resolve({
+    ok: true,
+    status: 200,
+    json: async () => ({
+      mounts: [{ fs: '/', usedBytes: 1, totalBytes: 2, usagePercent: 50 }],
     }),
-  );
-});
+  });
 
-afterEach(() => {
-  cleanup();
-  vi.unstubAllGlobals();
-});
+describe('<App /> static snapshot', () => {
+  beforeEach(() => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn((url: string) => {
+        if (url === '/healthz') return okHealth();
+        if (url === '/api/metrics/cpu') return okCpu();
+        return Promise.reject(new Error(`unexpected url: ${url}`));
+      }),
+    );
+  });
 
-describe('<App />', () => {
+  afterEach(() => {
+    cleanup();
+    vi.unstubAllGlobals();
+  });
+
   it('renders Backend: ok after a successful /healthz fetch', async () => {
     render(<App />);
     await waitFor(() =>
@@ -49,8 +66,7 @@ describe('<App />', () => {
     vi.stubGlobal(
       'fetch',
       vi.fn((url: string) => {
-        if (url === '/healthz')
-          return Promise.reject(new Error('network'));
+        if (url === '/healthz') return Promise.reject(new Error('network'));
         if (url === '/api/metrics/cpu') return okCpu();
         return Promise.reject(new Error(`unexpected url: ${url}`));
       }),
@@ -63,10 +79,7 @@ describe('<App />', () => {
   });
 
   it('starts in a non-ok state before the fetch resolves', () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockReturnValue(new Promise(() => {})),
-    );
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})));
     render(<App />);
     expect(screen.queryByText(/Backend: ok/i)).toBeNull();
   });
@@ -94,5 +107,47 @@ describe('<App />', () => {
       expect(screen.getByTestId('cpu-chart')).toBeInTheDocument(),
     );
     expect(screen.getByText(/Backend: ok/i)).toBeInTheDocument();
+  });
+});
+
+describe('<App /> polling', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn((url: string) => {
+        if (url === '/healthz') return okHealth();
+        if (url === '/api/metrics/cpu') return okCpu();
+        if (url === '/api/metrics/memory') return okMemory();
+        if (url === '/api/metrics/disk') return okDisk();
+        return Promise.reject(new Error(`unexpected url: ${url}`));
+      }),
+    );
+  });
+
+  afterEach(() => {
+    cleanup();
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
+  });
+
+  it('polls /api/metrics/cpu at the configured interval', async () => {
+    render(<App />);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    const countCpu = () =>
+      (
+        global.fetch as unknown as { mock: { calls: Array<[string]> } }
+      ).mock.calls.filter(([url]) => url === '/api/metrics/cpu').length;
+    expect(countCpu()).toBeGreaterThanOrEqual(1);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(POLL_INTERVAL_MS);
+    });
+    expect(countCpu()).toBeGreaterThanOrEqual(2);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(POLL_INTERVAL_MS);
+    });
+    expect(countCpu()).toBeGreaterThanOrEqual(3);
   });
 });
