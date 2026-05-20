@@ -19,3 +19,34 @@ export async function getCpu(): Promise<CpuMetricDto> {
   if (!res.ok) throw new Error(`cpu ${res.status}`);
   return res.json();
 }
+
+export const MEMORY_ENDPOINT = '/api/metrics/memory';
+
+export type MemoryMetricDto = {
+  usedBytes: number;
+  totalBytes: number;
+  usagePercent: number;
+};
+
+export async function getMemory(): Promise<MemoryMetricDto> {
+  const res = await fetch(MEMORY_ENDPOINT);
+  if (!res.ok) throw new Error(`memory ${res.status}`);
+  return res.json();
+}
+
+export const DISK_ENDPOINT = '/api/metrics/disk';
+
+export type DiskMetricDto = {
+  mounts: Array<{
+    fs: string;
+    usedBytes: number;
+    totalBytes: number;
+    usagePercent: number;
+  }>;
+};
+
+export async function getDisk(): Promise<DiskMetricDto> {
+  const res = await fetch(DISK_ENDPOINT);
+  if (!res.ok) throw new Error(`disk ${res.status}`);
+  return res.json();
+}

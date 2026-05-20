@@ -1,7 +1,6 @@
 import styles from './App.module.css';
 import { useHealth, type HealthStatus } from './hooks/useHealth';
-import { useCpu } from './hooks/useCpu';
-import { CpuChart } from './components/CpuChart';
+import { Dashboard } from './components/Dashboard';
 
 const STATUS_LABEL: Record<HealthStatus, string> = {
   loading: '…',
@@ -11,7 +10,6 @@ const STATUS_LABEL: Record<HealthStatus, string> = {
 
 export default function App() {
   const { status } = useHealth();
-  const { data: cpuData, status: cpuStatus } = useCpu();
 
   return (
     <main className={styles.page}>
@@ -29,10 +27,7 @@ export default function App() {
         </section>
       </header>
       <section className={styles.main}>
-        <CpuChart data={cpuData ?? []} />
-        {cpuStatus === 'error' && (
-          <p className={styles.notice}>CPU metric unavailable</p>
-        )}
+        <Dashboard />
       </section>
     </main>
   );

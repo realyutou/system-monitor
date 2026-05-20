@@ -37,11 +37,11 @@
     - `afterEach`：`cleanup()`；`vi.unstubAllGlobals()`；`vi.useRealTimers()`
     - `it('polls /api/metrics/cpu at the configured interval')`：`render(<App />)`；`await vi.advanceTimersByTimeAsync(0)`；helper `const countCpu = () => (global.fetch as any).mock.calls.filter(([url]: any[]) => url === '/api/metrics/cpu').length`；`expect(countCpu()).toBeGreaterThanOrEqual(1)`；`await vi.advanceTimersByTimeAsync(POLL_INTERVAL_MS)`；`expect(countCpu()).toBeGreaterThanOrEqual(2)`；再 advance 一次；`expect(countCpu()).toBeGreaterThanOrEqual(3)`
 - [x] 1.11 跑 `npm test -- config`、`npm test -- toMemorySeries`、`npm test -- toDiskSnapshot`、`npm test -- memory-chart`、`npm test -- disk-chart`、`npm test -- useMetricPolling`、`npm test -- dashboard`、`npm test -- app`，全部新增 / 修改的案例 fail（模組 / 元件不存在）；既有 cpu / toCpuSeries / cpu-chart / healthz 全綠
-- [ ] 1.12 commit，訊息標註 `stage 6 (red): failing polling hook + transforms + memory/disk charts + dashboard + app polling tests`
+- [x] 1.12 commit，訊息標註 `stage 6 (red): failing polling hook + transforms + memory/disk charts + dashboard + app polling tests`
 
 ## 2. 🟢 Green：實作 config / useMetricPolling / api 擴充 / transforms / charts / wrappers / Dashboard
 
-- [ ] 2.1 新增 `src/config.ts`：
+- [x] 2.1 新增 `src/config.ts`：
     ```ts
     export function readNumberEnv(value: string | undefined, fallback: number): number {
       if (value === undefined || value === '') return fallback;
@@ -51,14 +51,14 @@
     export const POLL_INTERVAL_MS: number = readNumberEnv(import.meta.env.VITE_POLL_INTERVAL_MS, 2000);
     export const METRIC_HISTORY_LIMIT: number = readNumberEnv(import.meta.env.VITE_METRIC_HISTORY_LIMIT, 30);
     ```
-- [ ] 2.2 修改 `src/lib/api.ts`：在現有 cpu / healthz exports 之後加：
+- [x] 2.2 修改 `src/lib/api.ts`：在現有 cpu / healthz exports 之後加：
     - `export const MEMORY_ENDPOINT = '/api/metrics/memory';`
     - `export type MemoryMetricDto = { usedBytes: number; totalBytes: number; usagePercent: number };`
     - `export async function getMemory(): Promise<MemoryMetricDto> { const res = await fetch(MEMORY_ENDPOINT); if (!res.ok) throw new Error(\`memory ${res.status}\`); return res.json(); }`
     - `export const DISK_ENDPOINT = '/api/metrics/disk';`
     - `export type DiskMetricDto = { mounts: Array<{ fs: string; usedBytes: number; totalBytes: number; usagePercent: number }> };`
     - `export async function getDisk(): Promise<DiskMetricDto> { const res = await fetch(DISK_ENDPOINT); if (!res.ok) throw new Error(\`disk ${res.status}\`); return res.json(); }`
-- [ ] 2.3 新增 `src/lib/toMemorySeries.ts`：
+- [x] 2.3 新增 `src/lib/toMemorySeries.ts`：
     ```ts
     import type { MemoryMetricDto } from './api';
     export type MemoryChartRow = { time: number; usage: number };
@@ -67,7 +67,7 @@
       return dtos.map((d) => ({ time: Date.parse(d.timestamp), usage: d.usagePercent }));
     }
     ```
-- [ ] 2.4 新增 `src/lib/toDiskSnapshot.ts`：
+- [x] 2.4 新增 `src/lib/toDiskSnapshot.ts`：
     ```ts
     import type { DiskMetricDto } from './api';
     export type DiskMountBar = { fs: string; usage: number };
@@ -76,7 +76,7 @@
       return latest?.mounts.map((m) => ({ fs: m.fs, usage: m.usagePercent })) ?? [];
     }
     ```
-- [ ] 2.5 新增 `src/hooks/useMetricPolling.ts`：
+- [x] 2.5 新增 `src/hooks/useMetricPolling.ts`：
     ```ts
     import { useEffect, useRef, useState } from 'react';
     import { POLL_INTERVAL_MS, METRIC_HISTORY_LIMIT } from '../config';
@@ -121,14 +121,14 @@
       return { data, status };
     }
     ```
-- [ ] 2.6 重寫 `src/hooks/useCpu.ts`：
+- [x] 2.6 重寫 `src/hooks/useCpu.ts`：
     ```ts
     import { useMetricPolling } from './useMetricPolling';
     import { getCpu } from '../lib/api';
     import { toCpuSeries } from '../lib/toCpuSeries';
     export const useCpu = () => useMetricPolling(getCpu, toCpuSeries);
     ```
-- [ ] 2.7 新增 `src/hooks/useMemory.ts`：
+- [x] 2.7 新增 `src/hooks/useMemory.ts`：
     ```ts
     import { useMetricPolling } from './useMetricPolling';
     import { getMemory, type MemoryMetricDto } from '../lib/api';
@@ -140,15 +140,15 @@
     });
     export const useMemory = () => useMetricPolling(getStampedMemory, toMemorySeries);
     ```
-- [ ] 2.8 新增 `src/hooks/useDisk.ts`：
+- [x] 2.8 新增 `src/hooks/useDisk.ts`：
     ```ts
     import { useMetricPolling } from './useMetricPolling';
     import { getDisk } from '../lib/api';
     import { toDiskSnapshot } from '../lib/toDiskSnapshot';
     export const useDisk = () => useMetricPolling(getDisk, toDiskSnapshot);
     ```
-- [ ] 2.9 新增 `src/components/MemoryChart.tsx`：鏡像 `CpuChart.tsx`，把 testid 換為 `memory-chart`、aria-label 換為 `Memory usage chart`、dataKey / domain 不變
-- [ ] 2.10 新增 `src/components/DiskChart.tsx`：
+- [x] 2.9 新增 `src/components/MemoryChart.tsx`：鏡像 `CpuChart.tsx`，把 testid 換為 `memory-chart`、aria-label 換為 `Memory usage chart`、dataKey / domain 不變
+- [x] 2.10 新增 `src/components/DiskChart.tsx`：
     ```tsx
     import { BarChart, Bar, XAxis, YAxis } from 'recharts';
     import type { DiskMountBar } from '../lib/toDiskSnapshot';
@@ -165,12 +165,12 @@
       );
     }
     ```
-- [ ] 2.11 新增 `src/components/Dashboard.tsx`：呼叫三個 hook、依序渲染三張圖；error notice 用 `{status === 'error' && <p className={styles.notice}>CPU/Memory/Disk metric unavailable</p>}`；外層 `<section data-testid="dashboard" className={styles.dashboard}>`
-- [ ] 2.12 修改 `src/App.tsx`：移除 `useCpu` / `<CpuChart>` 的直接呼叫；改為 `<header>` + `<Dashboard />`；保留 `useHealth` + `Backend: ok` 顯示
-- [ ] 2.13 修改 `src/App.module.css`：加 `.dashboard` 區塊樣式（縱向 flex、gap、padding）；`.notice` 規則可重用既有；如有必要把 `main` 區塊 layout 調整為承載 dashboard 而非單一 chart
-- [ ] 2.14 跑 `npm test -- config`、`npm test -- toMemorySeries`、`npm test -- toDiskSnapshot`、`npm test -- memory-chart`、`npm test -- disk-chart`，每組分別綠
-- [ ] 2.15 跑 `npm test -- useMetricPolling`、`npm test -- dashboard`、`npm test -- app`，全綠
-- [ ] 2.16 跑 `npm test`，前後端所有測試全綠（後端 4 支 + toCpuSeries 3 支 + cpu-chart 2 支 + config / toMemorySeries / toDiskSnapshot / memory-chart / disk-chart / useMetricPolling / dashboard / app 新增與修改的案例）
+- [x] 2.11 新增 `src/components/Dashboard.tsx`：呼叫三個 hook、依序渲染三張圖；error notice 用 `{status === 'error' && <p className={styles.notice}>CPU/Memory/Disk metric unavailable</p>}`；外層 `<section data-testid="dashboard" className={styles.dashboard}>`
+- [x] 2.12 修改 `src/App.tsx`：移除 `useCpu` / `<CpuChart>` 的直接呼叫；改為 `<header>` + `<Dashboard />`；保留 `useHealth` + `Backend: ok` 顯示
+- [x] 2.13 修改 `src/App.module.css`：加 `.dashboard` 區塊樣式（縱向 flex、gap、padding）；`.notice` 規則可重用既有；如有必要把 `main` 區塊 layout 調整為承載 dashboard 而非單一 chart
+- [x] 2.14 跑 `npm test -- config`、`npm test -- toMemorySeries`、`npm test -- toDiskSnapshot`、`npm test -- memory-chart`、`npm test -- disk-chart`，每組分別綠
+- [x] 2.15 跑 `npm test -- useMetricPolling`、`npm test -- dashboard`、`npm test -- app`，全綠
+- [x] 2.16 跑 `npm test`，前後端所有測試全綠（後端 4 支 + toCpuSeries 3 支 + cpu-chart 2 支 + config / toMemorySeries / toDiskSnapshot / memory-chart / disk-chart / useMetricPolling / dashboard / app 新增與修改的案例）
 - [ ] 2.17 commit，訊息標註 `stage 6 (green): useMetricPolling + memory/disk charts + Dashboard wired into App`
 
 ## 3. ♻️ Refactor：確認 src/config.ts 是 polling 常數唯一來源、清理多餘 inline 常數
