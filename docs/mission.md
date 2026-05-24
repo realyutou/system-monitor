@@ -29,7 +29,7 @@
 - **長期儲存 / 歷史資料**：指標只活在 process 記憶體裡，重啟即丟，不接資料庫或時序資料庫。
 - **告警 / 通知**：不發 email、不打 webhook、不接 PagerDuty。
 - **生產級可觀測性**：不做分散式追蹤、log shipping、SLO 計算。
-- **NetData 整合**：README 雖允許，但本專案明確選擇直接以 Node.js 採集；理由見 [`tech-stack.md`](./tech-stack.md) 取捨記錄。
+- **NetData 整合**：`BACKGROUND.md` 雖允許，但本專案明確選擇直接以 Node.js 採集；理由見 [`tech-stack.md`](./tech-stack.md) 取捨記錄。
 
 ## 品質原則
 

@@ -22,4 +22,3 @@
 4. Confirm real-time data updates
 5. Verify responsive design across viewports
 6. Confirm correct chart rendering
-7. 
